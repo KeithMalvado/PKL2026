@@ -1,0 +1,181 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Palet hijau utama (brand DKPP) */
+    --color-hijau-50: #f0fdf4;
+    --color-hijau-100: #dcfce7;
+    --color-hijau-200: #bbf7d0;
+    --color-hijau-300: #86efac;
+    --color-hijau-400: #4ade80;
+    --color-hijau-500: #22c55e;
+    --color-hijau-600: #16a34a;
+    --color-hijau-700: #15803d;
+    --color-hijau-800: #166534;
+    --color-hijau-900: #14532d;
+    --color-hijau-950: #052e16;
+
+    /* Aksen emas lembut utk nuansa resmi */
+    --color-emas-400: #fbbf24;
+    --color-emas-500: #f59e0b;
+}
+
+/* ====== Animasi scroll reveal ====== */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+    will-change: opacity, transform;
+}
+
+[data-reveal].tampil {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* variasi arah reveal */
+[data-reveal='kiri'] {
+    transform: translateX(-32px);
+}
+[data-reveal='kanan'] {
+    transform: translateX(32px);
+}
+[data-reveal='kiri'].tampil,
+[data-reveal='kanan'].tampil {
+    transform: translateX(0);
+}
+
+/* jeda bertahap utk efek berurutan */
+[data-delay='1'] { transition-delay: 0.1s; }
+[data-delay='2'] { transition-delay: 0.2s; }
+[data-delay='3'] { transition-delay: 0.3s; }
+[data-delay='4'] { transition-delay: 0.4s; }
+
+/* ====== Keyframes tambahan ====== */
+@keyframes mengambang {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+.animasi-mengambang {
+    animation: mengambang 6s ease-in-out infinite;
+}
+
+@keyframes berdenyut-halus {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+.animasi-denyut {
+    animation: berdenyut-halus 2.5s ease-in-out infinite;
+}
+
+/* efek garis bawah animasi utk link nav */
+.nav-link-anim {
+    position: relative;
+}
+.nav-link-anim::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 0;
+    background-color: var(--color-hijau-600);
+    transition: width 0.3s ease;
+}
+.nav-link-anim:hover::after {
+    width: 100%;
+}
+
+/* scrollbar halus bernuansa hijau */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--color-hijau-50);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-hijau-300);
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-hijau-500);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ====== Gaya konten rich-text (prose) ====== */
+.prose-dkpp {
+    color: #475569;
+    line-height: 1.8;
+    font-size: 1rem;
+}
+.prose-dkpp h1,
+.prose-dkpp h2,
+.prose-dkpp h3,
+.prose-dkpp h4 {
+    color: #166534;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-top: 1.75em;
+    margin-bottom: 0.6em;
+}
+.prose-dkpp h1 { font-size: 1.75rem; }
+.prose-dkpp h2 { font-size: 1.4rem; }
+.prose-dkpp h3 { font-size: 1.2rem; }
+.prose-dkpp p { margin-bottom: 1.15em; }
+.prose-dkpp a {
+    color: #16a34a;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.prose-dkpp a:hover { color: #15803d; }
+.prose-dkpp ul,
+.prose-dkpp ol {
+    margin: 1em 0 1.15em;
+    padding-left: 1.4em;
+}
+.prose-dkpp ul { list-style: disc; }
+.prose-dkpp ol { list-style: decimal; }
+.prose-dkpp li { margin-bottom: 0.4em; }
+.prose-dkpp blockquote {
+    border-left: 4px solid var(--color-hijau-500);
+    background: var(--color-hijau-50);
+    padding: 0.8em 1.2em;
+    border-radius: 0 0.75rem 0.75rem 0;
+    font-style: italic;
+    color: #334155;
+    margin: 1.4em 0;
+}
+.prose-dkpp img {
+    border-radius: 0.75rem;
+    margin: 1.4em 0;
+}
+.prose-dkpp strong { color: #1e293b; font-weight: 700; }
+.prose-dkpp table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+}
+.prose-dkpp th,
+.prose-dkpp td {
+    border: 1px solid var(--color-hijau-100);
+    padding: 0.6em 0.9em;
+    text-align: left;
+}
+.prose-dkpp th {
+    background: var(--color-hijau-50);
+    color: #166534;
+    font-weight: 700;
+}
