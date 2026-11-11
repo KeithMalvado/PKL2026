@@ -65,16 +65,36 @@ class PengaduanController extends Controller
     {
         $this->pastikanBolehAkses($pgdn, $request->user());
 
-        $pgdn->load(['bdg', 'bukti', 'verifikator', 'teknis', 'lhtl.petugas', 'skm', 'log' => fn ($q) => $q->with('petugas')->latest()]);
+        $pgdn->load([
+            'bdg',
+            'bukti',
+            'verifikator',
+            'teknis',
+            'lhtl.petugas',
+            'skm',
+            'log' => fn ($q) => $q->with('petugas')->latest(),
+        ]);
 
-        // daftar tim teknis utk disposisi (sesuai bidang bila ada)
-        $dtTeknis = User::where('role', 'teknis')->where('aktif', true)
-            ->when($pgdn->bdg_id, fn ($q) => $q->where('bdg_id', $pgdn->bdg_id))
+        // Seluruh bidang untuk form disposisi admin
+        $dtBdg = \App\Models\Bdg::orderBy('nama')->get();
+
+        // Tim teknis aktif, disesuaikan dengan bidang tiket jika sudah ada
+        $dtTeknis = User::with('bdg')
+            ->where('role', 'teknis')
+            ->where('aktif', true)
+            ->when(
+                $pgdn->bdg_id,
+                fn ($q) => $q->where('bdg_id', $pgdn->bdg_id)
+            )
+            ->orderBy('name')
             ->get();
 
-        return view('panel.pengaduan.show', compact('pgdn', 'dtTeknis'));
+        return view('panel.pengaduan.show', compact(
+            'pgdn',
+            'dtTeknis',
+            'dtBdg'
+        ));
     }
-
     // ===== Aksi: Verifikasi (Admin) =====
     public function verifikasi(Pgdn $pgdn, Request $request): RedirectResponse
     {
@@ -135,11 +155,20 @@ class PengaduanController extends Controller
         $this->pastikanAdmin($request->user());
         abort_unless($pgdn->sts === 'verif', 403, 'Pengaduan harus diverifikasi dahulu.');
 
+
         $data = $request->validate([
             'bdg_id' => ['required', 'exists:bdg,id'],
-            'teknis_id' => ['required', 'exists:users,id'],
+            'teknis_id' => [
+                'required',
+                Rule::exists('users', 'id')
+                    ->where('role', 'teknis')
+                    ->where('aktif', 1)
+                    ->where('bdg_id', $request->input('bdg_id')),
+            ],
             'batas_sla' => ['required', 'date', 'after:today'],
-        ], [], [
+        ], [
+            'teknis_id.exists' => 'Tim teknis harus aktif dan berasal dari bidang tujuan.',
+        ], [
             'bdg_id' => 'bidang',
             'teknis_id' => 'tim teknis',
             'batas_sla' => 'batas waktu',
@@ -149,7 +178,10 @@ class PengaduanController extends Controller
             'darurat' => true,
             'bdg_id' => $data['bdg_id'],
             'teknis_id' => $data['teknis_id'],
-            'batas_sla' => $data['batas_sla'],
+            'batas_sla' => \Carbon\Carbon::parse(
+                $data['batas_sla'],
+                'Asia/Jakarta'
+            )->endOfDay()->setTimezone('UTC')->format('Y-m-d H:i:s'),
             'tgl_dsps' => now(),
         ]);
 
@@ -169,10 +201,19 @@ class PengaduanController extends Controller
         abort_unless($pgn->isKabid() && $pgdn->bdg_id === $pgn->bdg_id, 403, 'Bukan wewenang Anda.');
         abort_unless($pgdn->sts === 'dsps', 403, 'Pengaduan belum didisposisikan.');
 
+
         $data = $request->validate([
-            'teknis_id' => ['required', 'exists:users,id'],
+            'teknis_id' => [
+                'required',
+                Rule::exists('users', 'id')
+                    ->where('role', 'teknis')
+                    ->where('aktif', 1)
+                    ->where('bdg_id', $pgdn->bdg_id),
+            ],
             'batas_sla' => ['required', 'date', 'after:today'],
-        ], [], [
+        ], [
+            'teknis_id.exists' => 'Petugas harus aktif dan berasal dari bidang yang sesuai.',
+        ], [
             'teknis_id' => 'tim teknis',
             'batas_sla' => 'batas waktu',
         ]);
@@ -192,37 +233,81 @@ class PengaduanController extends Controller
     }
 
     // ===== Aksi: Simpan LHTL (Teknis) =====
+
     public function simpanLhtl(Pgdn $pgdn, Request $request): RedirectResponse
     {
         $pgn = $request->user();
-        abort_unless($pgn->isTeknis() && $pgdn->teknis_id === $pgn->id, 403, 'Bukan tugas Anda.');
-        abort_unless($pgdn->sts === 'proses', 403, 'Pengaduan belum dalam proses tindak lanjut.');
 
-        $data = $request->validate([
-            'uraian' => ['required', 'string', 'min:10', 'max:3000'],
-            'foto' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
-        ], [], ['uraian' => 'uraian hasil tindak lanjut']);
-
-        $pathFoto = null;
-        if ($request->hasFile('foto')) {
-            $pathFoto = $request->file('foto')->store('lhtl', 'public');
-        }
-
-        Lhtl::updateOrCreate(
-            ['pgdn_id' => $pgdn->id],
-            ['pgn_id' => $pgn->id, 'uraian' => $data['uraian'], 'foto' => $pathFoto]
+        // Pastikan hanya tim teknis yang ditugaskan yang bisa mengisi LHTL
+        abort_unless(
+            $pgn->isTeknis() && $pgdn->teknis_id === $pgn->id,
+            403,
+            'Bukan tugas Anda.'
         );
 
+        // Pastikan pengaduan masih dalam proses
+        abort_unless(
+            $pgdn->sts === 'proses',
+            403,
+            'Pengaduan belum dalam proses tindak lanjut.'
+        );
+
+        // Validasi input dengan pesan bahasa Indonesia
+        $data = $request->validate(
+            [
+                'uraian' => ['required', 'string', 'min:10', 'max:3000'],
+                'foto' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
+            ],
+            [
+                'uraian.required' => 'Uraian hasil tindak lanjut wajib diisi.',
+                'uraian.string' => 'Uraian harus berupa teks.',
+                'uraian.min' => 'Uraian minimal 10 karakter.',
+                'uraian.max' => 'Uraian maksimal 3000 karakter.',
+
+                'foto.image' => 'File yang diunggah harus berupa gambar.',
+                'foto.mimes' => 'Format foto harus JPG, JPEG, atau PNG.',
+                'foto.max' => 'Ukuran foto tidak boleh melebihi 2 MB.',
+                'foto.uploaded' => 'Foto gagal diunggah. Silakan coba lagi.',
+            ],
+            [
+                'uraian' => 'uraian hasil tindak lanjut',
+                'foto' => 'foto hasil penanganan',
+            ]
+        );
+
+        // Data utama LHTL
+        $dataLhtl = [
+            'pgn_id' => $pgn->id,
+            'uraian' => $data['uraian'],
+        ];
+
+        // Foto hanya diperbarui jika ada upload baru
+        // Jika tidak ada foto baru, foto lama tetap tersimpan
+        if ($request->hasFile('foto')) {
+            $dataLhtl['foto'] = $request->file('foto')
+                ->store('lhtl', 'public');
+        }
+
+        // Buat LHTL baru atau perbarui LHTL yang sudah ada
+        Lhtl::updateOrCreate(
+            ['pgdn_id' => $pgdn->id],
+            $dataLhtl
+        );
+
+        // Catat aktivitas di riwayat pengaduan
         PgdnLog::create([
             'pgdn_id' => $pgdn->id,
             'pgn_id' => $pgn->id,
-            'aksi' => 'LHTL Diunggah',
+            'aksi' => 'LHTL Disimpan',
             'sts_lama' => $pgdn->sts,
             'sts_baru' => $pgdn->sts,
-            'ket' => 'Laporan Hasil Tindak Lanjut telah disusun tim teknis.',
+            'ket' => 'Laporan Hasil Tindak Lanjut telah disimpan oleh tim teknis.',
         ]);
 
-        return back()->with('sukses', 'LHTL berhasil disimpan. Menunggu verifikasi admin untuk penyelesaian.');
+        return back()->with(
+            'sukses',
+            'LHTL berhasil disimpan. Menunggu verifikasi admin untuk penyelesaian.'
+        );
     }
 
     // ===== Aksi: Selesaikan + kirim survei SKM (Admin) =====
