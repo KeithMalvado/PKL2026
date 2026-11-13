@@ -77,6 +77,7 @@ class LayananController extends Controller
     public function artikelDetail(Art $art): View
     {
         abort_unless($art->terbit, 404);
+
         return view('publik.layanan.artikel-detail', compact('art'));
     }
 
@@ -84,12 +85,14 @@ class LayananController extends Controller
     public function inovasi(): View
     {
         $dtInov = Inov::where('terbit', true)->latest()->paginate(9);
+
         return view('publik.layanan.inovasi-index', compact('dtInov'));
     }
 
     public function inovasiDetail(Inov $inov): View
     {
         abort_unless($inov->terbit, 404);
+
         return view('publik.layanan.inovasi-detail', compact('inov'));
     }
 

@@ -1,9 +1,17 @@
 <?php
 
+use App\Http\Controllers\Panel\ArtikelController;
 use App\Http\Controllers\Panel\AuthController;
+use App\Http\Controllers\Panel\BeritaController;
+use App\Http\Controllers\Panel\BidangController;
 use App\Http\Controllers\Panel\DashboardController;
+use App\Http\Controllers\Panel\ForumController;
+use App\Http\Controllers\Panel\HalamanController as HalamanPanelController;
 use App\Http\Controllers\Panel\PengaduanController;
+use App\Http\Controllers\Panel\PengaturanController;
 use App\Http\Controllers\Panel\ProfilController;
+use App\Http\Controllers\Panel\SopController;
+use App\Http\Controllers\Panel\VideoController;
 use App\Http\Controllers\Publik\GaleriController;
 use App\Http\Controllers\Publik\HalamanController;
 use App\Http\Controllers\Publik\LayananController;
@@ -33,6 +41,9 @@ Route::prefix('profil')->name('profil.')->group(function () {
         Route::get('/perikanan', [HalamanController::class, 'bidangIkan'])->name('ikan');
     });
 });
+
+// ===== Bidang (daftar artikel per bidang) =====
+Route::get('/bidang/{bdg}', [HalamanController::class, 'bidang'])->name('bidang.detail');
 
 // ===== Alur & SOP =====
 Route::get('/alur-dan-sop', [HalamanController::class, 'alurSop'])->name('alur-sop');
@@ -112,7 +123,6 @@ Route::middleware(['auth', 'role'])->prefix('panel')->name('panel.')->group(func
 
         // aksi workflow
         Route::post('/{pgdn}/verifikasi', [PengaduanController::class, 'verifikasi'])->name('verifikasi');
-        Route::post('/{pgdn}/tolak', [PengaduanController::class, 'tolak'])->name('tolak');
         Route::post('/{pgdn}/disposisi', [PengaduanController::class, 'disposisi'])->name('disposisi');
         Route::post('/{pgdn}/darurat', [PengaduanController::class, 'darurat'])->name('darurat');
         Route::post('/{pgdn}/tunjuk-teknis', [PengaduanController::class, 'tunjukTeknis'])->name('tunjuk-teknis');
@@ -124,6 +134,51 @@ Route::middleware(['auth', 'role'])->prefix('panel')->name('panel.')->group(func
     Route::get('/profil', [ProfilController::class, 'edit'])->name('profil');
     Route::put('/profil', [ProfilController::class, 'perbarui'])->name('profil.perbarui');
     Route::put('/profil/sandi', [ProfilController::class, 'ubahSandi'])->name('profil.sandi');
+
+    // ===== Kelola konten (admin) =====
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengaturan.index');
+        Route::put('/pengaturan', [PengaturanController::class, 'simpan'])->name('pengaturan.simpan');
+        Route::delete('/pengaturan/logo', [PengaturanController::class, 'hapusLogo'])->name('pengaturan.logo-hapus');
+
+        Route::get('/bidang', [BidangController::class, 'index'])->name('bidang.index');
+        Route::put('/bidang/{bdg}', [BidangController::class, 'perbarui'])->name('bidang.perbarui');
+        Route::delete('/bidang/{bdg}/logo', [BidangController::class, 'hapusLogo'])->name('bidang.logo-hapus');
+
+        Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
+        Route::get('/berita/tambah', [BeritaController::class, 'create'])->name('berita.create');
+        Route::post('/berita', [BeritaController::class, 'simpan'])->name('berita.simpan');
+        Route::get('/berita/{brt}/ubah', [BeritaController::class, 'edit'])->name('berita.edit');
+        Route::put('/berita/{brt}', [BeritaController::class, 'perbarui'])->name('berita.perbarui');
+        Route::delete('/berita/{brt}', [BeritaController::class, 'hapus'])->name('berita.hapus');
+
+        Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
+        Route::get('/artikel/tambah', [ArtikelController::class, 'create'])->name('artikel.create');
+        Route::post('/artikel', [ArtikelController::class, 'simpan'])->name('artikel.simpan');
+        Route::get('/artikel/{art}/ubah', [ArtikelController::class, 'edit'])->name('artikel.edit');
+        Route::put('/artikel/{art}', [ArtikelController::class, 'perbarui'])->name('artikel.perbarui');
+        Route::delete('/artikel/{art}', [ArtikelController::class, 'hapus'])->name('artikel.hapus');
+
+        Route::get('/video', [VideoController::class, 'index'])->name('video.index');
+        Route::post('/video', [VideoController::class, 'simpan'])->name('video.simpan');
+        Route::put('/video/{vid}', [VideoController::class, 'perbarui'])->name('video.perbarui');
+        Route::delete('/video/{vid}', [VideoController::class, 'hapus'])->name('video.hapus');
+
+        Route::get('/sop', [SopController::class, 'index'])->name('sop.index');
+        Route::post('/sop', [SopController::class, 'simpan'])->name('sop.simpan');
+        Route::put('/sop/{dok}', [SopController::class, 'perbarui'])->name('sop.perbarui');
+        Route::delete('/sop/{dok}', [SopController::class, 'hapus'])->name('sop.hapus');
+
+        Route::get('/halaman', [HalamanPanelController::class, 'index'])->name('halaman.index');
+        Route::get('/halaman/{hal}/ubah', [HalamanPanelController::class, 'edit'])->name('halaman.edit');
+        Route::put('/halaman/{hal}', [HalamanPanelController::class, 'perbarui'])->name('halaman.perbarui');
+        Route::delete('/halaman/{hal}/gambar', [HalamanPanelController::class, 'hapusGambar'])->name('halaman.gambar-hapus');
+
+        Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
+        Route::post('/forum/{forum}/jawab', [ForumController::class, 'jawab'])->name('forum.jawab');
+        Route::put('/forum/{forum}/tampil', [ForumController::class, 'tampil'])->name('forum.tampil');
+        Route::delete('/forum/{forum}', [ForumController::class, 'hapus'])->name('forum.hapus');
+    });
 
     Route::post('/keluar', [AuthController::class, 'keluar'])->name('keluar');
 });

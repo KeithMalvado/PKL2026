@@ -160,7 +160,7 @@ class PgdnController extends Controller
     protected function buatKodeTiket(): string
     {
         do {
-            $kode = 'PGDN-' . now()->format('Ymd') . '-' . strtoupper(Str::random(4));
+            $kode = 'PGDN-'.now()->format('Ymd').'-'.strtoupper(Str::random(4));
         } while (Pgdn::where('kd_tkt', $kode)->exists());
 
         return $kode;

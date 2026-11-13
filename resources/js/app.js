@@ -29,8 +29,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         },
-        { threshold: 0.12 }
+        { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
     );
 
     elReveal.forEach((el) => pengamat.observe(el));
+});
+
+// efek parallax halus utk elemen ber-atribut [data-parallax]
+document.addEventListener('DOMContentLoaded', () => {
+    const daftar = Array.from(document.querySelectorAll('[data-parallax]'));
+
+    if (daftar.length === 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+
+    let minta = false;
+
+    const perbarui = () => {
+        const posisi = window.scrollY;
+
+        daftar.forEach((el) => {
+            const laju = parseFloat(el.dataset.parallax) || 0.12;
+            el.style.transform = `translate3d(0, ${posisi * laju}px, 0)`;
+        });
+
+        minta = false;
+    };
+
+    window.addEventListener(
+        'scroll',
+        () => {
+            if (!minta) {
+                minta = true;
+                window.requestAnimationFrame(perbarui);
+            }
+        },
+        { passive: true }
+    );
 });

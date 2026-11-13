@@ -54,8 +54,23 @@ class User extends Authenticatable
 
     // ===== Helper role =====
 
-    public function isAdmin(): bool { return $this->role === 'admin'; }
-    public function isKadis(): bool { return $this->role === 'kadis'; }
-    public function isKabid(): bool { return $this->role === 'kabid'; }
-    public function isTeknis(): bool { return $this->role === 'teknis'; }
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isKadis(): bool
+    {
+        return $this->role === 'kadis';
+    }
+
+    public function isKabid(): bool
+    {
+        return $this->role === 'kabid';
+    }
+
+    public function isTeknis(): bool
+    {
+        return $this->role === 'teknis';
+    }
 }

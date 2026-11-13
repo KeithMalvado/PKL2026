@@ -3,15 +3,18 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bdg;
 use App\Models\Lhtl;
 use App\Models\Pgdn;
 use App\Models\PgdnLog;
 use App\Models\User;
 use App\Services\WaService;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 /**
@@ -76,7 +79,7 @@ class PengaduanController extends Controller
         ]);
 
         // Seluruh bidang untuk form disposisi admin
-        $dtBdg = \App\Models\Bdg::orderBy('nama')->get();
+        $dtBdg = Bdg::orderBy('nama')->get();
 
         // Tim teknis aktif, disesuaikan dengan bidang tiket jika sudah ada
         $dtTeknis = User::with('bdg')
@@ -95,6 +98,7 @@ class PengaduanController extends Controller
             'dtBdg'
         ));
     }
+
     // ===== Aksi: Verifikasi (Admin) =====
     public function verifikasi(Pgdn $pgdn, Request $request): RedirectResponse
     {
@@ -107,27 +111,6 @@ class PengaduanController extends Controller
         ]);
 
         return back()->with('sukses', 'Pengaduan berhasil diverifikasi. Silakan tentukan tindak lanjut.');
-    }
-
-    // ===== Aksi: Tolak (Admin) =====
-    public function tolak(Pgdn $pgdn, Request $request): RedirectResponse
-    {
-        $this->pastikanAdmin($request->user());
-        abort_if(in_array($pgdn->sts, ['selesai', 'tolak']), 403);
-
-        $data = $request->validate([
-            'alasan_tolak' => ['required', 'string', 'min:5', 'max:500'],
-        ], [], ['alasan_tolak' => 'alasan penolakan']);
-
-        $this->ubahStatus($pgdn, 'tolak', 'Penolakan', $data['alasan_tolak'], [
-            'alasan_tolak' => $data['alasan_tolak'],
-        ]);
-
-        // notif pelapor
-        $this->wa->kirim($pgdn->no_telp,
-            "Mohon maaf, pengaduan Anda ({$pgdn->kd_tkt}) tidak dapat kami proses.\nAlasan: {$data['alasan_tolak']}");
-
-        return back()->with('sukses', 'Pengaduan ditolak dan pelapor telah diberi tahu.');
     }
 
     // ===== Aksi: Disposisi ke Kabid (Admin, non-darurat) =====
@@ -155,7 +138,6 @@ class PengaduanController extends Controller
         $this->pastikanAdmin($request->user());
         abort_unless($pgdn->sts === 'verif', 403, 'Pengaduan harus diverifikasi dahulu.');
 
-
         $data = $request->validate([
             'bdg_id' => ['required', 'exists:bdg,id'],
             'teknis_id' => [
@@ -178,7 +160,7 @@ class PengaduanController extends Controller
             'darurat' => true,
             'bdg_id' => $data['bdg_id'],
             'teknis_id' => $data['teknis_id'],
-            'batas_sla' => \Carbon\Carbon::parse(
+            'batas_sla' => Carbon::parse(
                 $data['batas_sla'],
                 'Asia/Jakarta'
             )->endOfDay()->setTimezone('UTC')->format('Y-m-d H:i:s'),
@@ -200,7 +182,6 @@ class PengaduanController extends Controller
         $pgn = $request->user();
         abort_unless($pgn->isKabid() && $pgdn->bdg_id === $pgn->bdg_id, 403, 'Bukan wewenang Anda.');
         abort_unless($pgdn->sts === 'dsps', 403, 'Pengaduan belum didisposisikan.');
-
 
         $data = $request->validate([
             'teknis_id' => [
