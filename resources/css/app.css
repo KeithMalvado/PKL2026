@@ -8,174 +8,408 @@
     --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 
-    /* Palet hijau utama (brand DKPP) */
-    --color-hijau-50: #f0fdf4;
-    --color-hijau-100: #dcfce7;
-    --color-hijau-200: #bbf7d0;
-    --color-hijau-300: #86efac;
-    --color-hijau-400: #4ade80;
-    --color-hijau-500: #22c55e;
-    --color-hijau-600: #16a34a;
-    --color-hijau-700: #15803d;
-    --color-hijau-800: #166534;
-    --color-hijau-900: #14532d;
-    --color-hijau-950: #052e16;
+    /*
+    | Palet utama: forest green (muted, tidak menyala)
+    | Referensi: forest green + sage + moss + warm sand
+    */
+    --color-hijau-50: #f1f7f3;
+    --color-hijau-100: #ddebe1;
+    --color-hijau-200: #bcd8c5;
+    --color-hijau-300: #92bca1;
+    --color-hijau-400: #669c7c;
+    --color-hijau-500: #47805f;
+    --color-hijau-600: #37674c;
+    --color-hijau-700: #2c533e;
+    --color-hijau-800: #254433;
+    --color-hijau-900: #1e382b;
+    --color-hijau-950: #0f1f18;
 
-    /* Aksen emas lembut utk nuansa resmi */
-    --color-emas-400: #fbbf24;
-    --color-emas-500: #f59e0b;
+    /* Sage: hijau keabu-abuan, utk latar & aksen lembut */
+    --color-sage-50: #f5f8f5;
+    --color-sage-100: #e9f0ea;
+    --color-sage-200: #d6e1d8;
+    --color-sage-300: #b8c9bc;
+    --color-sage-400: #95ac9b;
+    --color-sage-500: #77907e;
+    --color-sage-600: #5e7565;
+    --color-sage-700: #4b5e52;
+    --color-sage-800: #3d4c43;
+    --color-sage-900: #333f38;
+    --color-sage-950: #1b231e;
+
+    /* Moss: hijau zaitun gelap, utk variasi tanpa keluar palet */
+    --color-moss-50: #f4f6ec;
+    --color-moss-100: #e6ebd3;
+    --color-moss-200: #cfd8ad;
+    --color-moss-300: #b0bf80;
+    --color-moss-400: #92a65b;
+    --color-moss-500: #75893f;
+    --color-moss-600: #5b6d30;
+    --color-moss-700: #475428;
+    --color-moss-800: #3a4423;
+    --color-moss-900: #323a20;
+    --color-moss-950: #191e0f;
+
+    /* Emas: pasir hangat, aksen resmi secukupnya */
+    --color-emas-50: #faf6ec;
+    --color-emas-100: #f4ebd5;
+    --color-emas-200: #e9d8ab;
+    --color-emas-300: #dbbe79;
+    --color-emas-400: #cda554;
+    --color-emas-500: #b98d3e;
+    --color-emas-600: #9c7132;
+    --color-emas-700: #7d572b;
+    --color-emas-800: #684728;
+    --color-emas-900: #593d25;
+    --color-emas-950: #332013;
+
+    /* Netral hangat bernuansa hijau */
+    --color-ink-50: #f6f7f6;
+    --color-ink-100: #ebeeec;
+    --color-ink-200: #d9dfdc;
+    --color-ink-300: #bcc6c1;
+    --color-ink-400: #6c7a74;
+    --color-ink-500: #5a6862;
+    --color-ink-600: #56635d;
+    --color-ink-700: #414c47;
+    --color-ink-800: #2c3531;
+    --color-ink-900: #1b221f;
+    --color-ink-950: #0e1412;
+
+    --shadow-lembut: 0 1px 2px rgba(14, 20, 18, 0.04), 0 14px 34px -18px rgba(14, 20, 18, 0.16);
+    --shadow-angkat: 0 2px 6px rgba(14, 20, 18, 0.05), 0 30px 60px -28px rgba(44, 83, 62, 0.38);
+    --shadow-kilau: 0 18px 40px -18px rgba(71, 128, 95, 0.42);
+
+    --radius-4xl: 2rem;
+    --radius-5xl: 2.5rem;
 }
 
-/* ====== Animasi scroll reveal ====== */
+/* ====== Dasar ====== */
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+    background: var(--color-hijau-200);
+    color: var(--color-hijau-900);
+}
+
+/* ====== Pola & gradasi latar ====== */
+.pola-titik {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+.pola-titik-gelap {
+    background-image: radial-gradient(rgba(44, 83, 62, 0.16) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+
+/* Hero: hijau hutan berlapis, tanpa warna di luar palet */
+.gradasi-hero {
+    background-color: #0f1f18;
+    background-image:
+        radial-gradient(115% 105% at 6% 0%, #2c533e 0%, transparent 56%),
+        radial-gradient(85% 85% at 94% 2%, #47805f 0%, transparent 52%),
+        radial-gradient(80% 90% at 76% 100%, #3a4423 0%, transparent 58%),
+        linear-gradient(135deg, #0f1f18 0%, #1a3227 48%, #12241c 100%);
+}
+
+.gradasi-lembut {
+    background-image:
+        radial-gradient(70% 60% at 100% 0%, rgba(102, 156, 124, 0.1) 0%, transparent 60%),
+        radial-gradient(60% 60% at 0% 100%, rgba(71, 128, 95, 0.1) 0%, transparent 60%),
+        linear-gradient(180deg, #ffffff 0%, #f4f9f5 55%, #ffffff 100%);
+}
+
+.gradasi-tema {
+    background-image: linear-gradient(115deg, var(--color-hijau-700) 0%, var(--color-hijau-600) 48%, var(--color-hijau-500) 100%);
+}
+
+.gradasi-tema-lembut {
+    background-image: linear-gradient(115deg, var(--color-hijau-50) 0%, var(--color-sage-50) 55%, var(--color-moss-50) 100%);
+}
+
+/* ====== Teks gradasi ====== */
+.teks-gradasi {
+    background-image: linear-gradient(100deg, var(--color-hijau-700) 0%, var(--color-hijau-500) 55%, var(--color-moss-500) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.teks-gradasi-terang {
+    background-image: linear-gradient(100deg, #ffffff 0%, var(--color-hijau-200) 50%, var(--color-emas-200) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* ====== Kartu & kaca ====== */
+.kartu {
+    border-radius: 1.5rem;
+    border: 1px solid color-mix(in oklab, var(--color-hijau-200) 60%, white);
+    background-color: #ffffff;
+    box-shadow: var(--shadow-lembut);
+    transition:
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.4s ease;
+}
+
+.kartu-angkat:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-hijau-300);
+    box-shadow: var(--shadow-angkat);
+}
+
+.kaca {
+    background-color: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+}
+
+.kaca-gelap {
+    background-color: rgba(15, 31, 24, 0.42);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+/* ====== Scroll reveal ====== */
 [data-reveal] {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(26px) scale(0.985);
     transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
 }
 
 [data-reveal].tampil {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 
-/* variasi arah reveal */
 [data-reveal='kiri'] {
-    transform: translateX(-32px);
+    transform: translateX(-36px);
 }
 [data-reveal='kanan'] {
-    transform: translateX(32px);
+    transform: translateX(36px);
+}
+[data-reveal='zoom'] {
+    transform: scale(0.92);
 }
 [data-reveal='kiri'].tampil,
-[data-reveal='kanan'].tampil {
-    transform: translateX(0);
+[data-reveal='kanan'].tampil,
+[data-reveal='zoom'].tampil {
+    transform: translateX(0) scale(1);
 }
 
-/* jeda bertahap utk efek berurutan */
-[data-delay='1'] { transition-delay: 0.1s; }
-[data-delay='2'] { transition-delay: 0.2s; }
-[data-delay='3'] { transition-delay: 0.3s; }
-[data-delay='4'] { transition-delay: 0.4s; }
+[data-delay='1'] { transition-delay: 0.08s; }
+[data-delay='2'] { transition-delay: 0.16s; }
+[data-delay='3'] { transition-delay: 0.24s; }
+[data-delay='4'] { transition-delay: 0.32s; }
+[data-delay='5'] { transition-delay: 0.4s; }
 
-/* ====== Keyframes tambahan ====== */
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    .animasi-mengambang,
+    .animasi-mengambang-lambat,
+    .animasi-denyut,
+    .animasi-putar,
+    .kilau::after {
+        animation: none !important;
+    }
+}
+
+/* ====== Keyframes ====== */
 @keyframes mengambang {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+    50% { transform: translateY(-14px); }
 }
 .animasi-mengambang {
-    animation: mengambang 6s ease-in-out infinite;
+    animation: mengambang 7s ease-in-out infinite;
+}
+
+@keyframes mengambang-lambat {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+    50% { transform: translate3d(10px, -22px, 0) rotate(4deg); }
+}
+.animasi-mengambang-lambat {
+    animation: mengambang-lambat 13s ease-in-out infinite;
 }
 
 @keyframes berdenyut-halus {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(1.12); }
 }
 .animasi-denyut {
-    animation: berdenyut-halus 2.5s ease-in-out infinite;
+    animation: berdenyut-halus 2.8s ease-in-out infinite;
 }
 
-/* efek garis bawah animasi utk link nav */
+@keyframes putar-lambat {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.animasi-putar {
+    animation: putar-lambat 34s linear infinite;
+}
+
+@keyframes kilau {
+    0% { transform: translateX(-120%) skewX(-16deg); }
+    60%, 100% { transform: translateX(220%) skewX(-16deg); }
+}
+.kilau {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+.kilau::after {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 45%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.34), transparent);
+    animation: kilau 5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes naik-halus {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animasi-naik {
+    animation: naik-halus 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ====== Navigasi ====== */
 .nav-link-anim {
     position: relative;
 }
 .nav-link-anim::after {
     content: '';
     position: absolute;
-    left: 0;
-    bottom: -4px;
+    left: 12px;
+    right: 12px;
+    bottom: 2px;
     height: 2px;
-    width: 0;
-    background-color: var(--color-hijau-600);
-    transition: width 0.3s ease;
+    border-radius: 9999px;
+    background-image: linear-gradient(90deg, var(--color-hijau-500), var(--color-hijau-300));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.nav-link-anim:hover::after {
-    width: 100%;
+.nav-link-anim:hover::after,
+.nav-link-anim[data-aktif='1']::after {
+    transform: scaleX(1);
 }
 
-/* scrollbar halus bernuansa hijau */
+/* ====== Scrollbar ====== */
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 11px;
+    height: 11px;
 }
 ::-webkit-scrollbar-track {
-    background: var(--color-hijau-50);
+    background: var(--color-ink-50);
 }
 ::-webkit-scrollbar-thumb {
-    background: var(--color-hijau-300);
+    background: linear-gradient(180deg, var(--color-hijau-300), var(--color-hijau-500));
+    border: 3px solid var(--color-ink-50);
     border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-hijau-500);
+    background: linear-gradient(180deg, var(--color-hijau-500), var(--color-hijau-700));
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-/* ====== Gaya konten rich-text (prose) ====== */
+/* ====== Konten rich-text ====== */
 .prose-dkpp {
-    color: #475569;
-    line-height: 1.8;
-    font-size: 1rem;
+    color: #3f4a45;
+    line-height: 1.85;
+    font-size: 1.0125rem;
+}
+.prose-dkpp > :first-child {
+    margin-top: 0;
 }
 .prose-dkpp h1,
 .prose-dkpp h2,
 .prose-dkpp h3,
 .prose-dkpp h4 {
-    color: #166534;
+    color: var(--color-hijau-900);
     font-weight: 800;
     line-height: 1.3;
-    margin-top: 1.75em;
-    margin-bottom: 0.6em;
+    letter-spacing: -0.015em;
+    margin-top: 1.9em;
+    margin-bottom: 0.65em;
 }
-.prose-dkpp h1 { font-size: 1.75rem; }
-.prose-dkpp h2 { font-size: 1.4rem; }
+.prose-dkpp h1 { font-size: 1.85rem; }
+.prose-dkpp h2 { font-size: 1.45rem; }
 .prose-dkpp h3 { font-size: 1.2rem; }
-.prose-dkpp p { margin-bottom: 1.15em; }
+.prose-dkpp p { margin-bottom: 1.2em; }
 .prose-dkpp a {
-    color: #16a34a;
+    color: var(--color-hijau-600);
     font-weight: 600;
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-decoration-color: color-mix(in oklab, var(--color-hijau-400) 60%, transparent);
+    text-underline-offset: 3px;
+    transition: color 0.2s;
 }
-.prose-dkpp a:hover { color: #15803d; }
+.prose-dkpp a:hover {
+    color: var(--color-hijau-800);
+}
 .prose-dkpp ul,
 .prose-dkpp ol {
-    margin: 1em 0 1.15em;
+    margin: 1em 0 1.2em;
     padding-left: 1.4em;
 }
 .prose-dkpp ul { list-style: disc; }
 .prose-dkpp ol { list-style: decimal; }
-.prose-dkpp li { margin-bottom: 0.4em; }
+.prose-dkpp li { margin-bottom: 0.45em; }
+.prose-dkpp li::marker { color: var(--color-hijau-400); }
 .prose-dkpp blockquote {
-    border-left: 4px solid var(--color-hijau-500);
-    background: var(--color-hijau-50);
-    padding: 0.8em 1.2em;
-    border-radius: 0 0.75rem 0.75rem 0;
+    border-left: 4px solid var(--color-hijau-400);
+    background: linear-gradient(120deg, var(--color-hijau-50), var(--color-sage-50));
+    padding: 1em 1.35em;
+    border-radius: 0 1rem 1rem 0;
     font-style: italic;
-    color: #334155;
-    margin: 1.4em 0;
+    color: var(--color-ink-700);
+    margin: 1.5em 0;
 }
 .prose-dkpp img {
-    border-radius: 0.75rem;
-    margin: 1.4em 0;
+    border-radius: 1rem;
+    margin: 1.5em 0;
+    box-shadow: var(--shadow-lembut);
 }
-.prose-dkpp strong { color: #1e293b; font-weight: 700; }
+.prose-dkpp strong { color: var(--color-ink-800); font-weight: 700; }
 .prose-dkpp table {
     width: 100%;
-    border-collapse: collapse;
-    margin: 1.4em 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1.5em 0;
+    overflow: hidden;
+    border-radius: 0.9rem;
+    border: 1px solid var(--color-hijau-100);
 }
 .prose-dkpp th,
 .prose-dkpp td {
-    border: 1px solid var(--color-hijau-100);
-    padding: 0.6em 0.9em;
+    border-bottom: 1px solid var(--color-hijau-100);
+    padding: 0.7em 0.95em;
     text-align: left;
 }
+.prose-dkpp tr:last-child td { border-bottom: 0; }
 .prose-dkpp th {
-    background: var(--color-hijau-50);
-    color: #166534;
+    background: linear-gradient(120deg, var(--color-hijau-50), var(--color-sage-50));
+    color: var(--color-hijau-900);
     font-weight: 700;
 }

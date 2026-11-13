@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Model video kegiatan (glr_vid).
@@ -18,6 +19,7 @@ class GlrVid extends Model
     {
         $url = $this->url ?? '';
         $pola = '%(?:youtube\.com/(?:watch\?v=|embed/|shorts/)|youtu\.be/)([\w-]{11})%i';
+
         return preg_match($pola, $url, $m) ? $m[1] : null;
     }
 
@@ -25,6 +27,7 @@ class GlrVid extends Model
     public function embedUrl(): ?string
     {
         $id = $this->ytId();
+
         return $id ? "https://www.youtube.com/embed/{$id}" : null;
     }
 
@@ -32,9 +35,10 @@ class GlrVid extends Model
     public function thumbUrl(): ?string
     {
         if ($this->thumbnail) {
-            return \Illuminate\Support\Facades\Storage::url($this->thumbnail);
+            return Storage::url($this->thumbnail);
         }
         $id = $this->ytId();
+
         return $id ? "https://img.youtube.com/vi/{$id}/hqdefault.jpg" : null;
     }
 }

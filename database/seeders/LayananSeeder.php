@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Art;
+use App\Models\Bdg;
 use App\Models\Brt;
 use App\Models\Forum;
 use App\Models\ForumBalas;
@@ -24,14 +25,14 @@ class LayananSeeder extends Seeder
 
         // ===== Berita PPID & Info Kegiatan (brt) =====
         $dtBrt = [
-            ['jenis' => 'ppid', 'judul' => 'Keterbukaan Informasi Publik: Laporan Realisasi Program 2025'],
-            ['jenis' => 'ppid', 'judul' => 'Pengumuman Daftar Informasi Publik Terbaru'],
-            ['jenis' => 'ppid', 'judul' => 'Standar Layanan Informasi Publik DKPP Jember'],
-            ['jenis' => 'ppid', 'judul' => 'Laporan Pelayanan Informasi Semester I'],
-            ['jenis' => 'kegiatan', 'judul' => 'Vaksinasi Massal Ternak di Kecamatan Ambulu'],
-            ['jenis' => 'kegiatan', 'judul' => 'Panen Raya Padi Bersama Kelompok Tani Sumbersari'],
-            ['jenis' => 'kegiatan', 'judul' => 'Pelatihan Budidaya Lele untuk Pembudidaya Pemula'],
-            ['jenis' => 'kegiatan', 'judul' => 'Gerakan Pangan Murah Menjelang Hari Raya'],
+            ['jenis' => 'ppid', 'judul' => 'Keterbukaan Informasi Publik: Laporan Realisasi Program 2025', 'bdg' => null],
+            ['jenis' => 'ppid', 'judul' => 'Pengumuman Daftar Informasi Publik Terbaru', 'bdg' => null],
+            ['jenis' => 'ppid', 'judul' => 'Standar Layanan Informasi Publik DKPP Jember', 'bdg' => null],
+            ['jenis' => 'ppid', 'judul' => 'Laporan Pelayanan Informasi Semester I', 'bdg' => null],
+            ['jenis' => 'kegiatan', 'judul' => 'Vaksinasi Massal Ternak di Kecamatan Ambulu', 'bdg' => 'kesehatan-hewan'],
+            ['jenis' => 'kegiatan', 'judul' => 'Panen Raya Padi Bersama Kelompok Tani Sumbersari', 'bdg' => 'ketahanan-pangan'],
+            ['jenis' => 'kegiatan', 'judul' => 'Pelatihan Budidaya Lele untuk Pembudidaya Pemula', 'bdg' => 'perikanan'],
+            ['jenis' => 'kegiatan', 'judul' => 'Gerakan Pangan Murah Menjelang Hari Raya', 'bdg' => 'ketahanan-pangan'],
         ];
 
         foreach ($dtBrt as $i => $brt) {
@@ -39,9 +40,10 @@ class LayananSeeder extends Seeder
                 ['slug' => Str::slug($brt['judul'])],
                 [
                     'jenis' => $brt['jenis'],
+                    'bdg_id' => $brt['bdg'] ? Bdg::where('slug', $brt['bdg'])->value('id') : null,
                     'judul' => $brt['judul'],
-                    'ringkasan' => 'Ringkasan singkat mengenai ' . $brt['judul'] . ' yang diselenggarakan oleh DKPP Kabupaten Jember.',
-                    'isi' => '<p>' . $brt['judul'] . '.</p><p>Dinas Ketahanan Pangan, Peternakan, dan Perikanan Kabupaten Jember berkomitmen menyelenggarakan program dan kegiatan yang bermanfaat bagi masyarakat. Kegiatan ini merupakan bagian dari upaya mewujudkan kemandirian pangan dan kesejahteraan peternak serta nelayan.</p><p>Informasi lebih lanjut dapat diperoleh melalui kontak resmi dinas.</p>',
+                    'ringkasan' => 'Ringkasan singkat mengenai '.$brt['judul'].' yang diselenggarakan oleh DKPP Kabupaten Jember.',
+                    'isi' => '<p>'.$brt['judul'].'.</p><p>Dinas Ketahanan Pangan, Peternakan, dan Perikanan Kabupaten Jember berkomitmen menyelenggarakan program dan kegiatan yang bermanfaat bagi masyarakat. Kegiatan ini merupakan bagian dari upaya mewujudkan kemandirian pangan dan kesejahteraan peternak serta nelayan.</p><p>Informasi lebih lanjut dapat diperoleh melalui kontak resmi dinas.</p>',
                     'pgn_id' => $admin?->id,
                     'terbit' => true,
                     'tgl_terbit' => now()->subDays(($i + 1) * 2),
@@ -52,11 +54,11 @@ class LayananSeeder extends Seeder
 
         // ===== Artikel & Jurnal (art) =====
         $dtArt = [
-            ['jenis' => 'artikel', 'judul' => 'Tips Menjaga Kesehatan Ternak di Musim Hujan'],
-            ['jenis' => 'artikel', 'judul' => 'Mengenal Komoditas Pangan Unggulan Kabupaten Jember'],
-            ['jenis' => 'artikel', 'judul' => 'Strategi Stabilisasi Harga Pangan di Tingkat Daerah'],
-            ['jenis' => 'jurnal', 'judul' => 'Analisis Produktivitas Perikanan Air Tawar di Jember'],
-            ['jenis' => 'jurnal', 'judul' => 'Kajian Ketahanan Pangan Berkelanjutan Wilayah Tapal Kuda'],
+            ['jenis' => 'artikel', 'judul' => 'Tips Menjaga Kesehatan Ternak di Musim Hujan', 'bdg' => 'kesehatan-hewan'],
+            ['jenis' => 'artikel', 'judul' => 'Mengenal Komoditas Pangan Unggulan Kabupaten Jember', 'bdg' => 'ketahanan-pangan'],
+            ['jenis' => 'artikel', 'judul' => 'Strategi Stabilisasi Harga Pangan di Tingkat Daerah', 'bdg' => 'ketahanan-pangan'],
+            ['jenis' => 'jurnal', 'judul' => 'Analisis Produktivitas Perikanan Air Tawar di Jember', 'bdg' => 'perikanan'],
+            ['jenis' => 'jurnal', 'judul' => 'Kajian Ketahanan Pangan Berkelanjutan Wilayah Tapal Kuda', 'bdg' => 'ketahanan-pangan'],
         ];
 
         foreach ($dtArt as $i => $art) {
@@ -64,10 +66,11 @@ class LayananSeeder extends Seeder
                 ['slug' => Str::slug($art['judul'])],
                 [
                     'jenis' => $art['jenis'],
+                    'bdg_id' => $art['bdg'] ? Bdg::where('slug', $art['bdg'])->value('id') : null,
                     'judul' => $art['judul'],
-                    'penulis' => 'Tim ' . ($art['jenis'] === 'jurnal' ? 'Peneliti' : 'Redaksi') . ' DKPP',
-                    'ringkasan' => 'Pembahasan mengenai ' . $art['judul'] . '.',
-                    'isi' => '<p>' . $art['judul'] . '.</p><p>Artikel ini membahas berbagai aspek penting terkait tema yang diangkat, disertai data dan rekomendasi yang relevan bagi masyarakat dan pemangku kepentingan.</p>',
+                    'penulis' => 'Tim '.($art['jenis'] === 'jurnal' ? 'Peneliti' : 'Redaksi').' DKPP',
+                    'ringkasan' => 'Pembahasan mengenai '.$art['judul'].'.',
+                    'isi' => '<p>'.$art['judul'].'.</p><p>Artikel ini membahas berbagai aspek penting terkait tema yang diangkat, disertai data dan rekomendasi yang relevan bagi masyarakat dan pemangku kepentingan.</p>',
                     'terbit' => true,
                     'tgl_terbit' => now()->subDays(($i + 1) * 3),
                 ]
@@ -86,8 +89,8 @@ class LayananSeeder extends Seeder
                 ['slug' => Str::slug($judul)],
                 [
                     'judul' => $judul,
-                    'ringkasan' => 'Inovasi pelayanan publik: ' . $judul . '.',
-                    'isi' => '<p>' . $judul . '.</p><p>Inovasi ini dirancang untuk meningkatkan kualitas pelayanan publik dan mempermudah akses masyarakat terhadap layanan dinas.</p>',
+                    'ringkasan' => 'Inovasi pelayanan publik: '.$judul.'.',
+                    'isi' => '<p>'.$judul.'.</p><p>Inovasi ini dirancang untuk meningkatkan kualitas pelayanan publik dan mempermudah akses masyarakat terhadap layanan dinas.</p>',
                     'terbit' => true,
                 ]
             );
@@ -105,7 +108,7 @@ class LayananSeeder extends Seeder
             $forum = Forum::updateOrCreate(
                 ['nama' => $f['nama'], 'judul' => $f['judul']],
                 [
-                    'email' => Str::slug($f['nama'], '.') . '@contoh.test',
+                    'email' => Str::slug($f['nama'], '.').'@contoh.test',
                     'pertanyaan' => $f['pertanyaan'],
                     'kat' => $f['kat'],
                     'sts' => $f['sts'],

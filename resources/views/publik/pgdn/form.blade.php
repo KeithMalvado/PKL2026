@@ -5,7 +5,7 @@
 @section('konten')
     <x-hero-halaman judul="Pengaduan Online" />
 
-    <section class="mx-auto max-w-4xl px-4 py-14">
+    <section class="mx-auto max-w-4xl px-4 py-16 md:px-6 md:py-20">
         {{-- notifikasi sukses: tampilkn kode tiket --}}
         @if (session('tiketBaru'))
             @php $tb = session('tiketBaru'); @endphp
@@ -14,15 +14,18 @@
                 data-reveal
                 class="mb-10 overflow-hidden rounded-2xl border border-hijau-200 bg-white shadow-lg"
             >
-                <div class="bg-gradient-to-br from-hijau-600 to-hijau-700 px-6 py-8 text-center text-white">
-                    <span class="mx-auto grid h-16 w-16 place-items-center rounded-full bg-white/20">
-                        <svg class="h-9 w-9" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </span>
-                    <h2 class="mt-4 text-xl font-bold">Pengaduan Berhasil Dikirim!</h2>
-                    <p class="mt-1 text-sm text-hijau-100">Terima kasih {{ $tb['nama'] }}, pengaduan Anda telah kami terima.</p>
+                <div class="gradasi-tema relative overflow-hidden px-6 py-8 text-center text-white">
+                    <div class="pola-titik absolute inset-0 opacity-25"></div>
+                    <div class="relative">
+                        <span class="mx-auto grid h-16 w-16 place-items-center rounded-full bg-white/20">
+                            <svg class="h-9 w-9" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </span>
+                        <h2 class="mt-4 text-xl font-bold">Pengaduan Berhasil Dikirim!</h2>
+                        <p class="mt-1 text-sm text-hijau-100">Terima kasih {{ $tb['nama'] }}, pengaduan Anda telah kami terima.</p>
+                    </div>
                 </div>
                 <div class="p-6 text-center">
-                    <p class="text-sm text-slate-500">Kode Tiket Anda</p>
+                    <p class="text-sm text-ink-500">Kode Tiket Anda</p>
                     <div class="mt-2 flex items-center justify-center gap-3">
                         <span class="text-2xl font-extrabold tracking-wider text-hijau-700">{{ $tb['kd_tkt'] }}</span>
                         <button @click="salin()" class="grid h-9 w-9 place-items-center rounded-lg bg-hijau-50 text-hijau-600 transition hover:bg-hijau-100" title="Salin kode">
@@ -42,37 +45,37 @@
         @endif
 
         {{-- info + tombol lacak --}}
-        <div class="mb-8 flex flex-col items-start justify-between gap-4 rounded-2xl border border-hijau-100 bg-hijau-50/50 p-5 sm:flex-row sm:items-center" data-reveal>
+        <div class="mb-8 flex flex-col items-start justify-between gap-4 rounded-2xl border border-hijau-100 bg-gradient-to-r from-hijau-50 via-white to-sage-50 p-5 shadow-sm sm:flex-row sm:items-center" data-reveal>
             <div class="flex items-start gap-3">
                 <svg class="h-6 w-6 shrink-0 text-hijau-600" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
-                <p class="text-sm text-slate-600">Sudah pernah mengadu? Pantau perkembangan laporan Anda dengan kode tiket.</p>
+                <p class="text-sm text-ink-600">Sudah pernah mengadu? Pantau perkembangan laporan Anda dengan kode tiket.</p>
             </div>
             <a href="{{ route('pgdn.lacak') }}" class="shrink-0 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-hijau-700 shadow-sm transition hover:bg-hijau-50">Lacak Pengaduan</a>
         </div>
 
         {{-- form --}}
-        <form method="POST" action="{{ route('pgdn.simpan') }}" enctype="multipart/form-data" class="rounded-2xl border border-hijau-100 bg-white p-6 shadow-sm md:p-8" data-reveal data-delay="1">
+        <form method="POST" action="{{ route('pgdn.simpan') }}" enctype="multipart/form-data" class="rounded-3xl border border-hijau-100 bg-white p-6 shadow-lembut md:p-9" data-reveal data-delay="1">
             @csrf
 
             <h2 class="text-lg font-bold text-hijau-800">Data Pelapor</h2>
             <div class="mt-4 grid gap-5 md:grid-cols-2">
                 <div>
-                    <label class="mb-1 block text-sm font-medium text-slate-700">Nama Lengkap <span class="text-red-500">*</span></label>
+                    <label class="mb-1 block text-sm font-medium text-ink-700">Nama Lengkap <span class="text-red-500">*</span></label>
                     <input type="text" name="nama_pelapor" value="{{ old('nama_pelapor') }}" required class="w-full rounded-xl border border-hijau-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-hijau-500 focus:ring-2 focus:ring-hijau-200">
                     @error('nama_pelapor')<p class="mt-1 text-xs text-red-500">{{ $message }}</p>@enderror
                 </div>
                 <div>
-                    <label class="mb-1 block text-sm font-medium text-slate-700">NIK (16 digit) <span class="text-red-500">*</span></label>
+                    <label class="mb-1 block text-sm font-medium text-ink-700">NIK (16 digit) <span class="text-red-500">*</span></label>
                     <input type="text" name="nik" value="{{ old('nik') }}" inputmode="numeric" maxlength="16" required class="w-full rounded-xl border border-hijau-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-hijau-500 focus:ring-2 focus:ring-hijau-200">
                     @error('nik')<p class="mt-1 text-xs text-red-500">{{ $message }}</p>@enderror
                 </div>
                 <div>
-                    <label class="mb-1 block text-sm font-medium text-slate-700">No. WhatsApp <span class="text-red-500">*</span></label>
+                    <label class="mb-1 block text-sm font-medium text-ink-700">No. WhatsApp <span class="text-red-500">*</span></label>
                     <input type="text" name="no_telp" value="{{ old('no_telp') }}" placeholder="08xxxxxxxxxx" required class="w-full rounded-xl border border-hijau-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-hijau-500 focus:ring-2 focus:ring-hijau-200">
                     @error('no_telp')<p class="mt-1 text-xs text-red-500">{{ $message }}</p>@enderror
                 </div>
                 <div>
-                    <label class="mb-1 block text-sm font-medium text-slate-700">Email <span class="text-slate-400">(opsional)</span></label>
+                    <label class="mb-1 block text-sm font-medium text-ink-700">Email <span class="text-ink-400">(opsional)</span></label>
                     <input type="email" name="email" value="{{ old('email') }}" class="w-full rounded-xl border border-hijau-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-hijau-500 focus:ring-2 focus:ring-hijau-200">
                     @error('email')<p class="mt-1 text-xs text-red-500">{{ $message }}</p>@enderror
                 </div>
@@ -82,9 +85,9 @@
             <div class="mt-4 space-y-5">
                 <div class="grid gap-5 md:grid-cols-2">
                     <div>
-                        <label class="mb-1 block text-sm font-medium text-slate-700">Kategori <span class="text-red-500">*</span></label>
+                        <label class="mb-1 block text-sm font-medium text-ink-700">Kategori <span class="text-red-500">*</span></label>
                         <select name="kat" required class="w-full rounded-xl border border-hijau-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-hijau-500 focus:ring-2 focus:ring-hijau-200">
-                            <option value="">— Pilih Kategori —</option>
+                            <option value="">&mdash; Pilih Kategori &mdash;</option>
                             @foreach ($dtKat as $kat)
                                 <option value="{{ $kat }}" @selected(old('kat')===$kat)>{{ $kat }}</option>
                             @endforeach
@@ -92,35 +95,35 @@
                         @error('kat')<p class="mt-1 text-xs text-red-500">{{ $message }}</p>@enderror
                     </div>
                     <div>
-                        <label class="mb-1 block text-sm font-medium text-slate-700">Lokasi Kejadian <span class="text-slate-400">(opsional)</span></label>
+                        <label class="mb-1 block text-sm font-medium text-ink-700">Lokasi Kejadian <span class="text-ink-400">(opsional)</span></label>
                         <input type="text" name="lokasi" value="{{ old('lokasi') }}" placeholder="Kecamatan / Desa" class="w-full rounded-xl border border-hijau-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-hijau-500 focus:ring-2 focus:ring-hijau-200">
                         @error('lokasi')<p class="mt-1 text-xs text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
                 <div>
-                    <label class="mb-1 block text-sm font-medium text-slate-700">Judul Pengaduan <span class="text-red-500">*</span></label>
+                    <label class="mb-1 block text-sm font-medium text-ink-700">Judul Pengaduan <span class="text-red-500">*</span></label>
                     <input type="text" name="judul" value="{{ old('judul') }}" required class="w-full rounded-xl border border-hijau-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-hijau-500 focus:ring-2 focus:ring-hijau-200">
                     @error('judul')<p class="mt-1 text-xs text-red-500">{{ $message }}</p>@enderror
                 </div>
                 <div>
-                    <label class="mb-1 block text-sm font-medium text-slate-700">Uraian Pengaduan <span class="text-red-500">*</span></label>
+                    <label class="mb-1 block text-sm font-medium text-ink-700">Uraian Pengaduan <span class="text-red-500">*</span></label>
                     <textarea name="isi" rows="5" required class="w-full rounded-xl border border-hijau-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-hijau-500 focus:ring-2 focus:ring-hijau-200">{{ old('isi') }}</textarea>
                     @error('isi')<p class="mt-1 text-xs text-red-500">{{ $message }}</p>@enderror
                 </div>
 
                 {{-- unggah bukti --}}
                 <div x-data="{ namaFile: [] }">
-                    <label class="mb-1 block text-sm font-medium text-slate-700">Bukti Pendukung <span class="text-slate-400">(opsional, maks 3 file - jpg/png/pdf, 2MB/file)</span></label>
+                    <label class="mb-1 block text-sm font-medium text-ink-700">Bukti Pendukung <span class="text-ink-400">(opsional, maks 3 file - jpg/png/pdf, 2MB/file)</span></label>
                     <label class="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-hijau-200 bg-hijau-50/50 px-6 py-8 text-center transition hover:border-hijau-400 hover:bg-hijau-50">
                         <svg class="h-10 w-10 text-hijau-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
                         <span class="mt-2 text-sm font-medium text-hijau-700">Klik untuk memilih berkas</span>
-                        <span class="text-xs text-slate-400">atau seret ke sini</span>
+                        <span class="text-xs text-ink-400">atau seret ke sini</span>
                         <input type="file" name="bukti[]" multiple accept=".jpg,.jpeg,.png,.pdf" class="hidden" @change="namaFile = Array.from($event.target.files).map(f => f.name)">
                     </label>
                     <template x-if="namaFile.length">
                         <ul class="mt-2 space-y-1">
                             <template x-for="(nm, i) in namaFile" :key="i">
-                                <li class="flex items-center gap-2 text-xs text-slate-600"><svg class="h-4 w-4 text-hijau-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75"/></svg><span x-text="nm"></span></li>
+                                <li class="flex items-center gap-2 text-xs text-ink-600"><svg class="h-4 w-4 text-hijau-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75"/></svg><span x-text="nm"></span></li>
                             </template>
                         </ul>
                     </template>
@@ -131,14 +134,14 @@
 
             {{-- captcha --}}
             <div class="mt-8 rounded-xl bg-hijau-50 p-5">
-                <label class="mb-2 block text-sm font-medium text-slate-700">Verifikasi: Berapa hasil dari <span class="font-bold text-hijau-700">{{ $soalCaptcha }}</span>? <span class="text-red-500">*</span></label>
+                <label class="mb-2 block text-sm font-medium text-ink-700">Verifikasi: Berapa hasil dari <span class="font-bold text-hijau-700">{{ $soalCaptcha }}</span>? <span class="text-red-500">*</span></label>
                 <input type="number" name="captcha" required class="w-40 rounded-xl border border-hijau-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-hijau-500 focus:ring-2 focus:ring-hijau-200">
                 @error('captcha')<p class="mt-1 text-xs text-red-500">{{ $message }}</p>@enderror
             </div>
 
             <div class="mt-8 flex items-center gap-3">
                 <button type="submit" class="rounded-xl bg-hijau-600 px-8 py-3 text-sm font-semibold text-white shadow-md shadow-hijau-600/30 transition hover:-translate-y-0.5 hover:bg-hijau-700">Kirim Pengaduan</button>
-                <button type="reset" class="rounded-xl border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-500 transition hover:bg-slate-50">Reset</button>
+                <button type="reset" class="rounded-xl border border-ink-200 px-6 py-3 text-sm font-semibold text-ink-500 transition hover:bg-ink-50">Reset</button>
             </div>
         </form>
     </section>

@@ -41,9 +41,9 @@ class WaService
         $no = preg_replace('/[^0-9]/', '', $noTelp);
 
         if (str_starts_with($no, '0')) {
-            $no = '62' . substr($no, 1);
+            $no = '62'.substr($no, 1);
         } elseif (! str_starts_with($no, '62')) {
-            $no = '62' . $no;
+            $no = '62'.$no;
         }
 
         return $no;
@@ -55,10 +55,10 @@ class WaService
     public function pesanTiketBaru(string $kdTkt, string $namaPelapor, string $judul): string
     {
         return "Halo {$namaPelapor},\n\n"
-            . "Pengaduan Anda telah kami terima.\n"
-            . "Kode Tiket: *{$kdTkt}*\n"
-            . "Perihal: {$judul}\n\n"
-            . "Simpan kode tiket ini untuk melacak status pengaduan di website kami.\n\n"
-            . "Dinas Ketahanan Pangan, Peternakan, dan Perikanan Kabupaten Jember";
+            ."Pengaduan Anda telah kami terima.\n"
+            ."Kode Tiket: *{$kdTkt}*\n"
+            ."Perihal: {$judul}\n\n"
+            ."Simpan kode tiket ini untuk melacak status pengaduan di website kami.\n\n"
+            .'Dinas Ketahanan Pangan, Peternakan, dan Perikanan Kabupaten Jember';
     }
 }

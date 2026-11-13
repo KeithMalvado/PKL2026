@@ -38,6 +38,7 @@ class GaleriController extends Controller
     public function video(): View
     {
         $dtVid = GlrVid::latest()->paginate(12);
+
         return view('publik.galeri.video', compact('dtVid'));
     }
 

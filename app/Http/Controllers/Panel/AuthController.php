@@ -34,7 +34,7 @@ class AuthController extends Controller
             'password' => 'kata sandi',
         ]);
 
-        $kunciThrottle = Str::lower($kredensial['email']) . '|' . $request->ip();
+        $kunciThrottle = Str::lower($kredensial['email']).'|'.$request->ip();
 
         // batasi 5 percobaan / menit
         if (RateLimiter::tooManyAttempts($kunciThrottle, 5)) {

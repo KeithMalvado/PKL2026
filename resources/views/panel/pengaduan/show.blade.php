@@ -8,10 +8,10 @@
     $pgn = auth()->user();
 
     $warnaStatus = [
-        'baru' => 'bg-slate-100 text-slate-700',
-        'verif' => 'bg-blue-100 text-blue-700',
-        'dsps' => 'bg-purple-100 text-purple-700',
-        'proses' => 'bg-amber-100 text-amber-700',
+        'baru' => 'bg-ink-100 text-ink-700',
+        'verif' => 'bg-sage-100 text-sage-700',
+        'dsps' => 'bg-moss-100 text-moss-700',
+        'proses' => 'bg-emas-100 text-emas-700',
         'selesai' => 'bg-hijau-100 text-hijau-700',
         'tolak' => 'bg-red-100 text-red-700',
     ];
@@ -31,11 +31,11 @@
                 &larr; Kembali ke Daftar Pengaduan
             </a>
 
-            <h2 class="mt-3 text-2xl font-bold text-slate-800">
+            <h2 class="mt-3 text-2xl font-bold text-ink-800">
                 Detail Pengaduan
             </h2>
 
-            <p class="mt-1 text-sm text-slate-500">
+            <p class="mt-1 text-sm text-ink-500">
                 Kode Tiket:
                 <span class="font-bold text-hijau-700">
                     {{ $pgdn->kd_tkt }}
@@ -45,7 +45,7 @@
 
         <div class="flex flex-wrap gap-2">
             <span class="rounded-full px-4 py-2 text-xs font-bold
-                {{ $warnaStatus[$pgdn->sts] ?? 'bg-slate-100 text-slate-700' }}">
+                {{ $warnaStatus[$pgdn->sts] ?? 'bg-ink-100 text-ink-700' }}">
                 {{ $pgdn->labelSts() }}
             </span>
 
@@ -79,64 +79,64 @@
 
             {{-- INFORMASI PENGADUAN --}}
             <section class="rounded-2xl border border-hijau-100 bg-white p-6 shadow-sm">
-                <h3 class="mb-5 text-lg font-bold text-slate-800">
+                <h3 class="mb-5 text-lg font-bold text-ink-800">
                     Informasi Pengaduan
                 </h3>
 
                 <div class="grid grid-cols-1 gap-5 text-sm sm:grid-cols-2">
 
                     <div>
-                        <p class="text-slate-500">Nama Pelapor</p>
-                        <p class="mt-1 font-semibold text-slate-800">
+                        <p class="text-ink-500">Nama Pelapor</p>
+                        <p class="mt-1 font-semibold text-ink-800">
                             {{ $pgdn->nama_pelapor }}
                         </p>
                     </div>
 
                     <div>
-                        <p class="text-slate-500">Tanggal Pengaduan</p>
-                        <p class="mt-1 font-semibold text-slate-800">
+                        <p class="text-ink-500">Tanggal Pengaduan</p>
+                        <p class="mt-1 font-semibold text-ink-800">
                             {{ $pgdn->created_at?->format('d M Y, H:i') ?? '-' }}
                         </p>
                     </div>
 
                     <div>
-                        <p class="text-slate-500">Kategori</p>
-                        <p class="mt-1 font-semibold text-slate-800">
+                        <p class="text-ink-500">Kategori</p>
+                        <p class="mt-1 font-semibold text-ink-800">
                             {{ $pgdn->kat }}
                         </p>
                     </div>
 
                     <div>
-                        <p class="text-slate-500">Nomor Telepon</p>
-                        <p class="mt-1 font-semibold text-slate-800">
+                        <p class="text-ink-500">Nomor Telepon</p>
+                        <p class="mt-1 font-semibold text-ink-800">
                             {{ $pgdn->no_telp ?: '-' }}
                         </p>
                     </div>
 
                     <div>
-                        <p class="text-slate-500">Email</p>
-                        <p class="mt-1 break-all font-semibold text-slate-800">
+                        <p class="text-ink-500">Email</p>
+                        <p class="mt-1 break-all font-semibold text-ink-800">
                             {{ $pgdn->email ?: '-' }}
                         </p>
                     </div>
 
                     <div>
-                        <p class="text-slate-500">Lokasi</p>
-                        <p class="mt-1 font-semibold text-slate-800">
+                        <p class="text-ink-500">Lokasi</p>
+                        <p class="mt-1 font-semibold text-ink-800">
                             {{ $pgdn->lokasi ?: '-' }}
                         </p>
                     </div>
 
                     <div class="sm:col-span-2">
-                        <p class="text-slate-500">Judul Pengaduan</p>
-                        <p class="mt-1 font-semibold text-slate-800">
+                        <p class="text-ink-500">Judul Pengaduan</p>
+                        <p class="mt-1 font-semibold text-ink-800">
                             {{ $pgdn->judul }}
                         </p>
                     </div>
 
                     <div class="sm:col-span-2">
-                        <p class="text-slate-500">Isi Pengaduan</p>
-                        <p class="mt-2 whitespace-pre-line break-words leading-relaxed text-slate-700">{{ $pgdn->isi }}</p>
+                        <p class="text-ink-500">Isi Pengaduan</p>
+                        <p class="mt-2 whitespace-pre-line break-words leading-relaxed text-ink-700">{{ $pgdn->isi }}</p>
                     </div>
 
                     @if($pgdn->alasan_tolak)
@@ -155,29 +155,29 @@
 
             {{-- PENANGANAN DAN SLA --}}
             <section class="rounded-2xl border border-hijau-100 bg-white p-6 shadow-sm">
-                <h3 class="mb-5 text-lg font-bold text-slate-800">
+                <h3 class="mb-5 text-lg font-bold text-ink-800">
                     Penanganan dan SLA
                 </h3>
 
                 <div class="grid grid-cols-1 gap-5 text-sm sm:grid-cols-2">
 
                     <div>
-                        <p class="text-slate-500">Bidang Penanganan</p>
-                        <p class="mt-1 font-semibold text-slate-800">
+                        <p class="text-ink-500">Bidang Penanganan</p>
+                        <p class="mt-1 font-semibold text-ink-800">
                             {{ $pgdn->bdg?->nama ?? 'Belum ditentukan' }}
                         </p>
                     </div>
 
                     <div>
-                        <p class="text-slate-500">Petugas Teknis</p>
-                        <p class="mt-1 font-semibold text-slate-800">
+                        <p class="text-ink-500">Petugas Teknis</p>
+                        <p class="mt-1 font-semibold text-ink-800">
                             {{ $pgdn->teknis?->name ?? 'Belum ditugaskan' }}
                         </p>
                     </div>
 
                     <div>
-                        <p class="text-slate-500">Batas Waktu SLA</p>
-                        <p class="mt-1 font-semibold text-slate-800">
+                        <p class="text-ink-500">Batas Waktu SLA</p>
+                        <p class="mt-1 font-semibold text-ink-800">
                             {{ $pgdn->batas_sla
                                 ? $pgdn->batas_sla->copy()->setTimezone('Asia/Jakarta')->format('d M Y H:i')
                                 : 'Belum ditentukan' }}
@@ -185,16 +185,16 @@
                     </div>
 
                     <div>
-                        <p class="text-slate-500">Status SLA</p>
+                        <p class="text-ink-500">Status SLA</p>
 
                         @if(!$pgdn->batas_sla)
-                            <p class="mt-1 text-slate-500">Belum ditentukan</p>
+                            <p class="mt-1 text-ink-500">Belum ditentukan</p>
                         @elseif($pgdn->sts === 'selesai')
                             <p class="mt-1 font-semibold text-hijau-700">
                                 Pengaduan selesai
                             </p>
                         @elseif($pgdn->sts === 'tolak')
-                            <p class="mt-1 text-slate-500">Ditolak</p>
+                            <p class="mt-1 text-ink-500">Ditolak</p>
                         @elseif($pgdn->slaLewat())
                             <p class="mt-1 font-semibold text-red-600">
                                 Melewati batas waktu
@@ -212,7 +212,7 @@
 
             {{-- BUKTI PENGADUAN --}}
             <section class="rounded-2xl border border-hijau-100 bg-white p-6 shadow-sm">
-                <h3 class="mb-4 text-lg font-bold text-slate-800">
+                <h3 class="mb-4 text-lg font-bold text-ink-800">
                     Bukti Pengaduan
                 </h3>
 
@@ -225,7 +225,7 @@
                         {{ $bukti->nama_asli ?: 'Bukti Pengaduan' }}
                     </a>
                 @empty
-                    <p class="text-sm text-slate-500">
+                    <p class="text-sm text-ink-500">
                         Belum ada bukti pengaduan.
                     </p>
                 @endforelse
@@ -233,14 +233,14 @@
 
             {{-- HASIL TINDAK LANJUT --}}
             <section class="rounded-2xl border border-hijau-100 bg-white p-6 shadow-sm">
-                <h3 class="mb-4 text-lg font-bold text-slate-800">
+                <h3 class="mb-4 text-lg font-bold text-ink-800">
                     Laporan Hasil Tindak Lanjut (LHTL)
                 </h3>
 
                 @if($pgdn->lhtl)
-                    <p class="whitespace-pre-line break-words text-sm leading-relaxed text-slate-700">{{ $pgdn->lhtl->uraian }}</p>
+                    <p class="whitespace-pre-line break-words text-sm leading-relaxed text-ink-700">{{ $pgdn->lhtl->uraian }}</p>
 
-                    <p class="mt-4 text-xs text-slate-500">
+                    <p class="mt-4 text-xs text-ink-500">
                         Dikerjakan oleh:
                         {{ $pgdn->lhtl->petugas?->name ?? '-' }}
                     </p>
@@ -254,7 +254,7 @@
                         </a>
                     @endif
                 @else
-                    <p class="text-sm text-slate-500">
+                    <p class="text-sm text-ink-500">
                         Tim teknis belum mengirimkan LHTL.
                     </p>
                 @endif
@@ -262,33 +262,33 @@
 
             {{-- RIWAYAT PENGADUAN --}}
             <section class="rounded-2xl border border-hijau-100 bg-white p-6 shadow-sm">
-                <h3 class="mb-5 text-lg font-bold text-slate-800">
+                <h3 class="mb-5 text-lg font-bold text-ink-800">
                     Riwayat Penanganan
                 </h3>
 
                 @forelse($pgdn->log as $log)
                     <div class="mb-5 border-l-2 border-hijau-300 pl-4">
                         <div class="flex flex-wrap justify-between gap-2">
-                            <h4 class="font-semibold text-slate-800">
+                            <h4 class="font-semibold text-ink-800">
                                 {{ $log->aksi }}
                             </h4>
 
-                            <span class="text-xs text-slate-400">
+                            <span class="text-xs text-ink-400">
                                 {{ $log->created_at?->format('d M Y H:i') }}
                             </span>
                         </div>
 
-                        <p class="mt-2 text-sm text-slate-600">
+                        <p class="mt-2 text-sm text-ink-600">
                             {{ $log->ket }}
                         </p>
 
-                        <p class="mt-2 text-xs text-slate-400">
+                        <p class="mt-2 text-xs text-ink-400">
                             Petugas:
                             {{ $log->petugas?->name ?? 'Sistem' }}
                         </p>
                     </div>
                 @empty
-                    <p class="text-sm text-slate-500">
+                    <p class="text-sm text-ink-500">
                         Belum ada riwayat tindakan.
                     </p>
                 @endforelse
@@ -299,11 +299,11 @@
         <aside class="space-y-5">
             <section class="rounded-2xl border border-hijau-100 bg-white p-6 shadow-sm">
 
-                <h3 class="text-lg font-bold text-slate-800">
+                <h3 class="text-lg font-bold text-ink-800">
                     Aksi Pengaduan
                 </h3>
 
-                <p class="mt-2 text-xs text-slate-500">
+                <p class="mt-2 text-xs text-ink-500">
                     Aksi tersedia berdasarkan status laporan dan peran petugas.
                 </p>
 
@@ -315,42 +315,16 @@
                               action="{{ route('panel.pengaduan.verifikasi', $pgdn) }}">
                             @csrf
 
-                            <h4 class="font-semibold text-slate-800">
+                            <h4 class="font-semibold text-ink-800">
                                 Verifikasi Pengaduan
                             </h4>
 
-                            <p class="mt-2 text-sm text-slate-500">
+                            <p class="mt-2 text-sm text-ink-500">
                                 Periksa kelengkapan laporan sebelum diverifikasi.
                             </p>
 
                             <button type="submit" class="{{ $buttonClass }}">
                                 Verifikasi Sekarang
-                            </button>
-                        </form>
-                    @endif
-
-                    {{-- ADMIN: TOLAK --}}
-                    @if($pgn->isAdmin() && !in_array($pgdn->sts, ['tolak', 'selesai'], true))
-                        <form method="POST"
-                              action="{{ route('panel.pengaduan.tolak', $pgdn) }}"
-                              onsubmit="return confirm('Yakin ingin menolak laporan ini?')">
-                            @csrf
-
-                            <h4 class="font-semibold text-slate-800">
-                                Tolak Pengaduan
-                            </h4>
-
-                            <textarea name="alasan_tolak"
-                                      rows="3"
-                                      minlength="5"
-                                      maxlength="500"
-                                      required
-                                      placeholder="Masukkan alasan penolakan..."
-                                      class="{{ $inputClass }}">{{ old('alasan_tolak') }}</textarea>
-
-                            <button type="submit"
-                                    class="mt-3 w-full rounded-xl bg-red-600 px-4 py-3 text-sm font-semibold text-white hover:bg-red-700">
-                                Tolak Pengaduan
                             </button>
                         </form>
                     @endif
@@ -361,11 +335,11 @@
                               action="{{ route('panel.pengaduan.disposisi', $pgdn) }}">
                             @csrf
 
-                            <h4 class="font-semibold text-slate-800">
+                            <h4 class="font-semibold text-ink-800">
                                 Disposisi Pengaduan
                             </h4>
 
-                            <label class="mt-3 block text-sm text-slate-600">
+                            <label class="mt-3 block text-sm text-ink-600">
                                 Pilih Bidang
                             </label>
 
@@ -396,7 +370,7 @@
                                 Penanganan Darurat
                             </h4>
 
-                            <label class="mt-3 block text-sm text-slate-600">
+                            <label class="mt-3 block text-sm text-ink-600">
                                 Bidang Tujuan
                             </label>
 
@@ -413,7 +387,7 @@
                                 @endforeach
                             </select>
 
-                            <label class="mt-3 block text-sm text-slate-600">
+                            <label class="mt-3 block text-sm text-ink-600">
                                 Tim Teknis
                             </label>
 
@@ -426,13 +400,12 @@
                                 @foreach($dtTeknis as $teknis)
                                     <option value="{{ $teknis->id }}"
                                             data-bidang="{{ $teknis->bdg_id }}">
-                                        {{ $teknis->name }}
-                                        — {{ $teknis->bdg?->nama ?? '-' }}
+                                        {{ $teknis->name }} &mdash; {{ $teknis->bdg?->nama ?? '-' }}
                                     </option>
                                 @endforeach
                             </select>
 
-                            <label class="mt-3 block text-sm text-slate-600">
+                            <label class="mt-3 block text-sm text-ink-600">
                                 Batas SLA
                             </label>
 
@@ -455,11 +428,11 @@
                               action="{{ route('panel.pengaduan.tunjuk-teknis', $pgdn) }}">
                             @csrf
 
-                            <h4 class="font-semibold text-slate-800">
+                            <h4 class="font-semibold text-ink-800">
                                 Penugasan Tim Teknis
                             </h4>
 
-                            <label class="mt-3 block text-sm text-slate-600">
+                            <label class="mt-3 block text-sm text-ink-600">
                                 Pilih Petugas
                             </label>
 
@@ -476,7 +449,7 @@
                                 @endforeach
                             </select>
 
-                            <label class="mt-3 block text-sm text-slate-600">
+                            <label class="mt-3 block text-sm text-ink-600">
                                 Batas Waktu SLA
                             </label>
 
@@ -500,11 +473,11 @@
                               enctype="multipart/form-data">
                             @csrf
 
-                            <h4 class="font-semibold text-slate-800">
+                            <h4 class="font-semibold text-ink-800">
                                 Input LHTL
                             </h4>
 
-                            <label class="mt-3 block text-sm text-slate-600">
+                            <label class="mt-3 block text-sm text-ink-600">
                                 Uraian Hasil Tindak Lanjut
                             </label>
 
@@ -516,7 +489,7 @@
                                       class="{{ $inputClass }}"
                                       placeholder="Jelaskan hasil penanganan pengaduan...">{{ old('uraian', $pgdn->lhtl?->uraian ?? '') }}</textarea>
 
-                            <label class="mt-3 block text-sm text-slate-600">
+                            <label class="mt-3 block text-sm text-ink-600">
                                 Foto Hasil Penanganan
                             </label>
 
@@ -525,7 +498,7 @@
                                    accept=".jpg,.jpeg,.png"
                                    class="{{ $inputClass }}">
 
-                            <p class="mt-2 text-xs text-slate-500">
+                            <p class="mt-2 text-xs text-ink-500">
                                 JPG atau PNG, maksimal 2 MB.
                             </p>
 
@@ -543,11 +516,11 @@
                                   onsubmit="return confirm('Pastikan LHTL sudah diperiksa. Selesaikan laporan?')">
                                 @csrf
 
-                                <h4 class="font-semibold text-slate-800">
+                                <h4 class="font-semibold text-ink-800">
                                     Penutupan Pengaduan
                                 </h4>
 
-                                <p class="mt-2 text-sm text-slate-500">
+                                <p class="mt-2 text-sm text-ink-500">
                                     Pastikan hasil tindak lanjut telah sesuai.
                                 </p>
 
@@ -556,14 +529,14 @@
                                 </button>
                             </form>
                         @else
-                            <p class="rounded-xl bg-amber-50 p-3 text-sm text-amber-700">
+                            <p class="rounded-xl bg-emas-50 p-3 text-sm text-emas-700">
                                 Menunggu LHTL dari tim teknis sebelum pengaduan bisa ditutup.
                             </p>
                         @endif
                     @endif
 
                     @if(in_array($pgdn->sts, ['selesai', 'tolak'], true))
-                        <p class="rounded-xl bg-slate-50 p-3 text-sm text-slate-500">
+                        <p class="rounded-xl bg-ink-50 p-3 text-sm text-ink-500">
                             Pengaduan sudah ditutup.
                         </p>
                     @elseif($pgn->isKadis())

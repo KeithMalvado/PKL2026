@@ -14,7 +14,7 @@ class Brt extends Model
     protected $table = 'brt';
 
     protected $fillable = [
-        'jenis', 'judul', 'slug', 'ringkasan', 'isi',
+        'jenis', 'bdg_id', 'judul', 'slug', 'ringkasan', 'isi',
         'gambar', 'pgn_id', 'terbit', 'tgl_terbit', 'dilihat',
     ];
 
@@ -29,6 +29,11 @@ class Brt extends Model
     public function penulis(): BelongsTo
     {
         return $this->belongsTo(User::class, 'pgn_id');
+    }
+
+    public function bdg(): BelongsTo
+    {
+        return $this->belongsTo(Bdg::class, 'bdg_id');
     }
 
     public function getRouteKeyName(): string
