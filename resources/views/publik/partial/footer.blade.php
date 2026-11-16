@@ -68,6 +68,16 @@
                     </a>
                 @endif
             </div>
+                        {{-- Media Sosial DKPP --}}
+            @if (count(sosmed()) > 0)
+                <div class="mt-5">
+                    <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-hijau-200">
+                        Ikuti Kami
+                    </p>
+
+                    <x-sosmed variant="gelap" />
+                </div>
+            @endif
         </div>
 
         {{-- tautan cepat --}}
