@@ -1,4 +1,5 @@
 
+
 @extends('panel.layout')
 
 @section('judul', 'Pengaturan Situs')
@@ -186,7 +187,7 @@
                 </div>
             </div>
 
-            {{-- 3. MEDIA SOSIAL (FITUR BARU) --}}
+            {{-- 3. MEDIA SOSIAL --}}
             <div class="rounded-2xl border border-hijau-100 bg-white p-6 shadow-sm">
 
                 <div class="mb-5">
@@ -242,7 +243,6 @@
                     @endforeach
 
                 </div>
-
             </div>
 
         </div>
@@ -253,27 +253,32 @@
             {{-- 4. LOGO SITUS --}}
             <div class="rounded-2xl border border-hijau-100 bg-white p-6 shadow-sm">
 
-                <h2 class="mb-4 font-bold text-ink-800">
+                <h2 class="mb-2 font-bold text-ink-800">
                     Logo Situs
                 </h2>
+
+                <p class="mb-4 text-xs leading-relaxed text-ink-500">
+                    Logo utama yang digunakan pada navbar, footer, dan halaman login.
+                </p>
 
                 <div class="grid place-items-center rounded-xl border border-hijau-100 bg-hijau-50/40 p-4">
                     <img
                         src="{{ $logo }}"
-                        alt="Logo saat ini"
+                        alt="Logo situs saat ini"
                         class="h-24 w-24 object-contain"
                     >
                 </div>
 
                 <input
                     type="file"
+                    id="logo"
                     name="logo"
                     accept=".jpg,.jpeg,.png,.webp"
                     class="mt-4 w-full rounded-xl border border-hijau-200 bg-white px-3 py-2 text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-hijau-600 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white"
                 >
 
                 <p class="mt-2 text-xs text-ink-400">
-                    PNG/JPG, maksimal 1 MB. Disarankan gambar persegi.
+                    PNG/JPG/WebP, maksimal 1 MB. Disarankan gambar persegi.
                 </p>
 
                 @error('logo')
@@ -284,7 +289,81 @@
 
             </div>
 
-            {{-- 5. SIMPAN PENGATURAN --}}
+            {{-- 5. LOGO KHUSUS DKPPP --}}
+            <div class="rounded-2xl border border-hijau-100 bg-white p-6 shadow-sm">
+
+                <h2 class="mb-2 font-bold text-ink-800">
+                    Logo DKPPP
+                </h2>
+
+                <p class="mb-4 text-xs leading-relaxed text-ink-500">
+                    Logo khusus yang ditampilkan di sebelah tulisan
+                    "Layanan Digital Terpadu" pada halaman beranda.
+                </p>
+
+                <div class="grid min-h-36 place-items-center rounded-xl border border-hijau-100 bg-hijau-50/40 p-4">
+
+                    @if ($logoDkppp)
+                        <img
+                            id="preview-logo-dkppp"
+                            src="{{ $logoDkppp }}"
+                            alt="Logo DKPPP saat ini"
+                            class="h-28 w-28 rounded-lg bg-white object-contain"
+                        >
+
+                        <p
+                            id="placeholder-logo-dkppp"
+                            class="hidden text-center text-xs text-ink-500"
+                        >
+                            Belum ada logo DKPPP.
+                        </p>
+                    @else
+                        <img
+                            id="preview-logo-dkppp"
+                            src=""
+                            alt="Pratinjau logo DKPPP"
+                            class="hidden h-28 w-28 rounded-lg bg-white object-contain"
+                        >
+
+                        <p
+                            id="placeholder-logo-dkppp"
+                            class="text-center text-xs text-ink-500"
+                        >
+                            Belum ada logo DKPPP yang diunggah.
+                        </p>
+                    @endif
+
+                </div>
+
+                <label
+                    for="logo_dkppp"
+                    class="mt-4 block text-sm font-medium text-ink-700"
+                >
+                    Unggah Logo DKPPP
+                </label>
+
+                <input
+                    type="file"
+                    id="logo_dkppp"
+                    name="logo_dkppp"
+                    accept=".jpg,.jpeg,.png,.webp"
+                    class="mt-2 w-full rounded-xl border border-hijau-200 bg-white px-3 py-2 text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-hijau-600 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white"
+                >
+
+                <p class="mt-2 text-xs leading-relaxed text-ink-400">
+                    PNG/JPG/WebP, maksimal 1 MB.
+                    Disarankan logo berbentuk persegi agar tampil proporsional.
+                </p>
+
+                @error('logo_dkppp')
+                    <p class="mt-1 text-xs text-red-500">
+                        {{ $message }}
+                    </p>
+                @enderror
+
+            </div>
+
+            {{-- 6. SIMPAN PENGATURAN --}}
             <button
                 type="submit"
                 class="w-full rounded-xl bg-hijau-700 px-4 py-3 text-sm font-semibold text-white transition hover:bg-hijau-800"
@@ -296,13 +375,13 @@
 
     </form>
 
-    {{-- 6. HAPUS LOGO UNGGAHAN --}}
+    {{-- 7. HAPUS LOGO SITUS --}}
     @if ($setelan['logo'] ?? null)
         <form
             method="POST"
             action="{{ route('panel.pengaturan.logo-hapus') }}"
             class="mt-4 lg:w-1/3"
-            onsubmit="return confirm('Kembalikan logo ke bawaan sistem?')"
+            onsubmit="return confirm('Kembalikan logo situs ke bawaan sistem?')"
         >
             @csrf
             @method('DELETE')
@@ -311,9 +390,77 @@
                 type="submit"
                 class="w-full rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-semibold text-red-600 transition hover:bg-red-100"
             >
-                Hapus Logo Unggahan
+                Hapus Logo Situs Unggahan
             </button>
         </form>
     @endif
 
+    {{-- 8. HAPUS LOGO DKPPP --}}
+    {{-- Tombol aktif setelah route hapus logo DKPPP tersedia. --}}
+    @if (($setelan['logo_dkppp'] ?? null) && \Illuminate\Support\Facades\Route::has('panel.pengaturan.logo-dkppp-hapus'))
+        <form
+            method="POST"
+            action="{{ route('panel.pengaturan.logo-dkppp-hapus') }}"
+            class="mt-4 lg:w-1/3"
+            onsubmit="return confirm('Hapus logo DKPPP yang diunggah?')"
+        >
+            @csrf
+            @method('DELETE')
+
+            <button
+                type="submit"
+                class="w-full rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-semibold text-red-600 transition hover:bg-red-100"
+            >
+                Hapus Logo DKPPP
+            </button>
+        </form>
+    @endif
+
+    {{-- Pratinjau logo DKPPP sebelum disimpan --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('logo_dkppp');
+            const preview = document.getElementById('preview-logo-dkppp');
+            const placeholder = document.getElementById('placeholder-logo-dkppp');
+
+            if (!input || !preview || !placeholder) {
+                return;
+            }
+
+            const gambarAwal = preview.getAttribute('src');
+            let previewSementara = null;
+
+            input.addEventListener('change', function () {
+                if (previewSementara) {
+                    URL.revokeObjectURL(previewSementara);
+                    previewSementara = null;
+                }
+
+                const file = input.files && input.files[0];
+
+                if (!file) {
+                    preview.setAttribute('src', gambarAwal || '');
+                    preview.classList.toggle('hidden', !gambarAwal);
+                    placeholder.classList.toggle('hidden', !!gambarAwal);
+                    return;
+                }
+
+                if (!file.type.startsWith('image/')) {
+                    input.value = '';
+                    return;
+                }
+
+                previewSementara = URL.createObjectURL(file);
+                preview.src = previewSementara;
+                preview.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+            });
+
+            window.addEventListener('pagehide', function () {
+                if (previewSementara) {
+                    URL.revokeObjectURL(previewSementara);
+                }
+            });
+        });
+    </script>
 @endsection

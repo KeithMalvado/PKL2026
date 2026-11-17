@@ -15,6 +15,14 @@ if (! function_exists('logo_situs')) {
     {
         return Bantu::logo();
     }
+
+}
+
+if (! function_exists('logo_dkppp')) {
+    function logo_dkppp(): ?string
+    {
+        return Bantu::logoDkppp();
+    }
 }
 
 if (! function_exists('logo_bdg')) {

@@ -29,6 +29,20 @@ class Bantu
         return asset('img/logo-dkpp.png');
     }
 
+
+    /** URL logo DKPPP untuk hero beranda. */
+    public static function logoDkppp(): ?string
+    {
+        $logo = Pengaturan::ambil('logo_dkppp');
+
+        if ($logo && Storage::disk('public')->exists($logo)) {
+            return Storage::url($logo);
+        }
+
+        return null;
+    }
+
+
     /** Url logo bidang; null bila belum diunggah. */
     public static function logoBdg(?Bdg $bdg): ?string
     {

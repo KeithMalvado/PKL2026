@@ -18,6 +18,7 @@ use App\Http\Controllers\Publik\LayananController;
 use App\Http\Controllers\Publik\PgdnController;
 use App\Http\Controllers\Publik\SkmController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Panel\AgendaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -131,6 +132,30 @@ Route::middleware(['auth', 'role'])->prefix('panel')->name('panel.')->group(func
     });
 
     // profil sendiri
+    // ===== Agenda Bulanan (Admin dan Kabid) =====
+    Route::middleware('role:admin,kabid')
+        ->prefix('agenda')
+        ->name('agenda.')
+        ->group(function () {
+            Route::get('/', [AgendaController::class, 'index'])
+                ->name('index');
+
+            Route::get('/tambah', [AgendaController::class, 'create'])
+                ->name('create');
+
+            Route::post('/', [AgendaController::class, 'simpan'])
+                ->name('simpan');
+
+            Route::get('/{agenda}/ubah', [AgendaController::class, 'edit'])
+                ->name('edit');
+
+            Route::put('/{agenda}', [AgendaController::class, 'perbarui'])
+                ->name('perbarui');
+
+            Route::delete('/{agenda}', [AgendaController::class, 'hapus'])
+                ->name('hapus');
+        });
+
     Route::get('/profil', [ProfilController::class, 'edit'])->name('profil');
     Route::put('/profil', [ProfilController::class, 'perbarui'])->name('profil.perbarui');
     Route::put('/profil/sandi', [ProfilController::class, 'ubahSandi'])->name('profil.sandi');

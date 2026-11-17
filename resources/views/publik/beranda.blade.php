@@ -12,10 +12,28 @@
 
         <div class="relative mx-auto grid max-w-7xl items-center gap-10 px-4 pb-20 pt-14 md:px-6 md:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-28 lg:pt-20">
             <div class="text-white">
-                <span class="animasi-naik inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-hijau-100 backdrop-blur">
-                    <span class="h-1.5 w-1.5 rounded-full bg-emas-400 animasi-denyut"></span>
-                    Layanan Digital Terpadu
-                </span>
+
+                {{-- Identitas DKPPP dan label Layanan Digital Terpadu --}}
+                <div class="animasi-naik flex items-center gap-3">
+
+                    {{-- Logo DKPPP dari Pengaturan Admin --}}
+                    @if (logo_dkppp())
+                       <div class="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/40 bg-white p-1.5 shadow-lg shadow-black/10">
+                            <img
+                                src="{{ logo_dkppp() }}"
+                                alt="Logo DKPPP Kabupaten Jember"
+                                class="h-full w-full object-contain"
+                            >
+                        </div>
+                    @endif
+
+                    {{-- Label tanpa titik emas --}}
+                    <span class="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[11.5px] font-bold uppercase tracking-[0.12em] text-hijau-100 backdrop-blur">
+                        Layanan Digital Terpadu
+                    </span>
+
+                </div>
+
 
                 <h1 class="animasi-naik mt-6 text-[2.15rem] font-extrabold leading-[1.12] tracking-tight md:text-5xl lg:text-[3.05rem] xl:text-[3.35rem]" style="animation-delay: .08s">
                     Dinas Ketahanan Pangan,
