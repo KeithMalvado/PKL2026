@@ -315,6 +315,11 @@
         </section>
     @endif
 
+
+    {{-- ================= AGENDA DKPPP ================= --}}
+    @include('publik.partials.agenda-beranda')
+
+
     {{-- ================= LAYANAN TERKAIT ================= --}}
     @php $dtTautan = array_filter(tautan_layanan(), fn ($t) => ! empty($t['url'])); @endphp
     @if (! empty($dtTautan))

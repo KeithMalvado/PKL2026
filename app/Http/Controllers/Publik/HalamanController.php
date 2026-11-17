@@ -10,6 +10,8 @@ use App\Models\DokSop;
 use App\Models\GlrVid;
 use App\Models\HalStatis;
 use Illuminate\View\View;
+use App\Models\Agenda;
+
 
 /**
  * Controller halaman publik.
@@ -39,6 +41,35 @@ class HalamanController extends Controller
             ->take(3)
             ->get();
 
+        // Agenda publik: hanya yang terbit dan tidak dibatalkan.
+        $hariIni = now('Asia/Jakarta')->toDateString();
+
+        $dasarAgenda = Agenda::query()
+            ->with('bdg')
+            ->where('status_publikasi', 'terbit')
+            ->whereNull('dibatalkan_at');
+
+        // Seluruh agenda hari ini, urut berdasarkan jam.
+        $agendaHariIni = (clone $dasarAgenda)
+            ->whereDate('tanggal', $hariIni)
+            ->orderBy('waktu_mulai')
+            ->orderBy('id')
+            ->get();
+
+        // Agenda setelah hari ini, dari tanggal paling dekat.
+        $agendaMendatang = (clone $dasarAgenda)
+            ->whereDate('tanggal', '>', $hariIni)
+            ->orderBy('tanggal')
+            ->orderBy('waktu_mulai')
+            ->orderBy('id')
+            ->take($agendaHariIni->isEmpty() ? 4 : 3)
+            ->get();
+
+        // Jika hari ini kosong, jadwal terdekat menjadi highlight.
+        $agendaHighlight = $agendaHariIni->isEmpty()
+            ? $agendaMendatang->shift()
+            : null;
+
         $stat = [
             'bidang' => Bdg::count(),
             'berita' => Brt::where('terbit', true)->count(),
@@ -46,7 +77,18 @@ class HalamanController extends Controller
             'sop' => DokSop::count(),
         ];
 
-        return view('publik.beranda', compact('dtBdg', 'dtVid', 'dtBerita', 'dtArtikel', 'stat'));
+
+        return view('publik.beranda', compact(
+            'dtBdg',
+            'dtVid',
+            'dtBerita',
+            'dtArtikel',
+            'stat',
+            'agendaHariIni',
+            'agendaMendatang',
+            'agendaHighlight'
+        ));
+
     }
 
     /** Halaman daftar artikel per bidang. */
