@@ -41,10 +41,10 @@
         <div class="lg:col-span-1">
             <div class="flex items-center gap-3">
                 <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-white/15 bg-white/10 p-1.5 backdrop-blur">
-                    <img src="{{ logo_situs() }}" alt="Logo DKPP Kabupaten Jember" class="h-full w-full object-contain">
+                    <img src="{{ logo_situs() }}" alt="Logo DKPPP Kabupaten Jember" class="h-full w-full object-contain">
                 </span>
                 <span class="leading-tight">
-                    <span class="block text-sm font-extrabold tracking-tight text-white">DKPP JEMBER</span>
+                    <span class="block text-sm font-extrabold tracking-tight text-white">DKPPP JEMBER</span>
                     <span class="block text-[11px] text-hijau-300">Kabupaten Jember</span>
                 </span>
             </div>
@@ -68,7 +68,7 @@
                     </a>
                 @endif
             </div>
-                        {{-- Media Sosial DKPP --}}
+                        {{-- Media Sosial DKPPP --}}
             @if (count(sosmed()) > 0)
                 <div class="mt-5">
                     <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-hijau-200">
@@ -83,7 +83,6 @@
         {{-- tautan cepat --}}
         <div>
             <h4 class="mb-4 flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.14em] text-white">
-                <span class="h-1.5 w-1.5 rounded-full bg-hijau-400"></span>
                 Tautan Cepat
             </h4>
             <ul class="space-y-2.5 text-sm">
@@ -107,7 +106,6 @@
         {{-- layanan --}}
         <div>
             <h4 class="mb-4 flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.14em] text-white">
-                <span class="h-1.5 w-1.5 rounded-full bg-sage-400"></span>
                 Layanan
             </h4>
             <ul class="space-y-2.5 text-sm">
@@ -140,8 +138,7 @@
         {{-- kontak --}}
         <div>
             <h4 class="mb-4 flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.14em] text-white">
-                <span class="h-1.5 w-1.5 rounded-full bg-emas-400"></span>
-                Kontak Center
+                Pusat Kontak
             </h4>
             <ul class="space-y-3.5 text-sm text-hijau-100/70">
                 @if (setelan('kontak.alamat'))
@@ -191,9 +188,8 @@
     {{-- bar bawah --}}
     <div class="relative border-t border-white/10">
         <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-hijau-100/50 md:px-6 sm:flex-row">
-            <p>&copy; {{ date('Y') }} DKPP Kabupaten Jember. Hak cipta dilindungi.</p>
+            <p>&copy; {{ date('Y') }} DKPPP Kabupaten Jember. Hak cipta dilindungi.</p>
             <p class="flex items-center gap-2">
-                <span class="h-1 w-1 rounded-full bg-hijau-400"></span>
                 Mewujudkan Pelayanan Publik yang Transparan &amp; Akuntabel
             </p>
         </div>

@@ -97,7 +97,7 @@
                             <div class="mt-4 rounded-r-2xl border-l-4 border-hijau-400 bg-gradient-to-r from-hijau-50 to-sage-50/40 p-4">
                                 <p class="flex items-center gap-2 text-xs font-bold text-hijau-700">
                                     <span class="grid h-6 w-6 place-items-center rounded-full bg-hijau-600 text-[10px] text-white">DK</span>
-                                    {{ $balas->petugas?->name ?? 'Petugas DKPP' }}
+                                    {{ $balas->petugas?->name ?? 'Petugas DKPPP' }}
                                 </p>
                                 <p class="mt-2 whitespace-pre-line text-sm leading-relaxed text-ink-600">{{ $balas->isi }}</p>
                             </div>

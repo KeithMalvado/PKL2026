@@ -195,7 +195,7 @@
                     </h2>
 
                     <p class="text-sm text-ink-500">
-                        Kelola hyperlink akun resmi media sosial DKPP Jember.
+                        Kelola hyperlink akun resmi media sosial DKPPP Jember.
                         Tautan yang diisi akan ditampilkan melalui komponen media sosial pada website.
                     </p>
                 </div>

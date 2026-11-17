@@ -64,10 +64,10 @@
             {{-- logo --}}
             <a href="{{ route('beranda') }}" class="group flex shrink-0 items-center gap-3">
                 <span class="relative grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-hijau-50 to-sage-50 p-1.5 ring-1 ring-hijau-100 transition duration-500 group-hover:ring-hijau-300">
-                    <img src="{{ logo_situs() }}" alt="Logo DKPP Kabupaten Jember" class="h-full w-full object-contain transition duration-500 group-hover:scale-105">
+                    <img src="{{ logo_situs() }}" alt="Logo DKPPP Kabupaten Jember" class="h-full w-full object-contain transition duration-500 group-hover:scale-105">
                 </span>
                 <span class="leading-tight">
-                    <span class="block text-[15px] font-extrabold tracking-tight text-hijau-900">DKPP JEMBER</span>
+                    <span class="block text-[15px] font-extrabold tracking-tight text-hijau-900">DKPPP JEMBER</span>
                     <span class="block text-[11px] font-medium text-ink-400">Pangan, Peternakan &amp; Perikanan</span>
                 </span>
             </a>

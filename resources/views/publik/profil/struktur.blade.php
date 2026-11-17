@@ -34,7 +34,7 @@
                         >
                             <img
                                 src="{{ \Illuminate\Support\Facades\Storage::url($gambar) }}"
-                                alt="Bagan Struktur Organisasi DKPP Jember"
+                                alt="Bagan Struktur Organisasi DKPPP Jember"
                                 @click="zoom = true"
                                 class="w-full cursor-zoom-in rounded-2xl transition duration-500 group-hover:scale-[1.01]"
                             >

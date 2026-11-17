@@ -54,7 +54,7 @@
                     href="{{ $url }}"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="{{ $nama }} DKPP Jember (buka tab baru)"
+                    aria-label="{{ $nama }} DKPPP Jember (buka tab baru)"
                     title="{{ $nama }}"
                     class="
                         grid {{ $ukuranKotak }}

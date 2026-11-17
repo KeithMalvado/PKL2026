@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="noindex, nofollow">
-    <title>@yield('judul', 'Dashboard') - Panel DKPP</title>
+    <title>@yield('judul', 'Dashboard') - Panel DKPPP</title>
     <link rel="icon" type="image/png" href="{{ logo_situs() }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -32,10 +32,10 @@
 
             <div class="relative flex h-16 items-center gap-3 border-b border-white/10 px-5">
                 <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/10 p-1 ring-1 ring-white/10">
-                    <img src="{{ logo_situs() }}" alt="Logo DKPP" class="h-full w-full object-contain">
+                    <img src="{{ logo_situs() }}" alt="Logo DKPPP" class="h-full w-full object-contain">
                 </span>
                 <div class="leading-tight">
-                    <p class="text-sm font-extrabold tracking-tight text-white">DKPP JEMBER</p>
+                    <p class="text-sm font-extrabold tracking-tight text-white">DKPPP JEMBER</p>
                     <p class="text-[11px] text-hijau-300">Panel Petugas</p>
                 </div>
             </div>

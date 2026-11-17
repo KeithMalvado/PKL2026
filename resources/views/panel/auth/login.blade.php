@@ -18,10 +18,10 @@
             <div class="relative flex h-full flex-col justify-between p-12 text-white">
                 <div class="flex items-center gap-3">
                     <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-white/15 p-1.5 backdrop-blur">
-                        <img src="{{ logo_situs() }}" alt="Logo DKPP" class="h-full w-full object-contain">
+                        <img src="{{ logo_situs() }}" alt="Logo DKPPP" class="h-full w-full object-contain">
                     </span>
                     <div>
-                        <p class="font-extrabold">DKPP JEMBER</p>
+                        <p class="font-extrabold">DKPPP JEMBER</p>
                         <p class="text-xs text-hijau-200">Portal Internal Petugas</p>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <h1 class="text-3xl font-extrabold leading-tight">Sistem Pengelolaan<br>Pengaduan &amp; Konten</h1>
                     <p class="mt-4 max-w-md text-hijau-100">Area khusus petugas Dinas Ketahanan Pangan, Peternakan, dan Perikanan Kabupaten Jember.</p>
                 </div>
-                <p class="text-xs text-hijau-300">&copy; {{ date('Y') }} DKPP Kabupaten Jember</p>
+                <p class="text-xs text-hijau-300">&copy; {{ date('Y') }} DKPPP Kabupaten Jember</p>
             </div>
         </div>
 
@@ -38,7 +38,7 @@
             <div class="w-full max-w-md" data-reveal>
                 <div class="mb-8 text-center lg:hidden">
                     <span class="mx-auto grid h-14 w-14 place-items-center rounded-xl bg-hijau-600 p-2 text-white">
-                        <img src="{{ logo_situs() }}" alt="Logo DKPP" class="h-full w-full object-contain">
+                        <img src="{{ logo_situs() }}" alt="Logo DKPPP" class="h-full w-full object-contain">
                     </span>
                 </div>
 

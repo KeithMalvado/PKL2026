@@ -26,7 +26,7 @@
                         </div>
                         <div class="mt-4 rounded-2xl bg-gradient-to-r from-hijau-600 to-sage-600 px-4 py-3 text-center text-white shadow-lg shadow-hijau-600/20">
                             <p class="text-sm font-bold">Kepala Dinas</p>
-                            <p class="text-xs text-hijau-100">DKPP Kabupaten Jember</p>
+                            <p class="text-xs text-hijau-100">DKPPP Kabupaten Jember</p>
                         </div>
                     </div>
 
