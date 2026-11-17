@@ -23,6 +23,16 @@ return [
         'ikon' => 'M8 10.5h8m-8 3h5m-9 5.25V6.75A2.25 2.25 0 016.25 4.5h11.5A2.25 2.25 0 0120 6.75v7.5a2.25 2.25 0 01-2.25 2.25H8.5L4 20.25z',
         'role' => ['admin', 'kabid', 'teknis'],
     ],
+
+
+    [
+        'judul' => 'Agenda Bulanan',
+        'route' => 'panel.agenda.index',
+        'aktif' => 'panel.agenda.*',
+        'ikon' => 'M6.75 3v2.25m10.5-2.25v2.25M3.75 8.25h16.5M5.25 5.25h13.5c.828 0 1.5.672 1.5 1.5v12c0 .828-.672 1.5-1.5 1.5H5.25c-.828 0-1.5-.672-1.5-1.5v-12c0-.828.672-1.5 1.5-1.5z',
+        'role' => ['admin', 'kabid'],
+    ],
+
     [
         'judul' => 'Monitoring SLA',
         'route' => 'panel.pengaduan.monitor-sla',
