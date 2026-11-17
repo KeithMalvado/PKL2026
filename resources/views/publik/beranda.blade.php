@@ -4,7 +4,7 @@
 
 @section('konten')
     {{-- ================= HERO ================= --}}
-    <section class="gradasi-hero relative isolate overflow-hidden">
+    <section class="gradasi-hero beranda-hero-transisi relative isolate overflow-hidden">
         <div class="pola-titik absolute inset-0 opacity-30"></div>
         <div class="animasi-mengambang-lambat absolute -left-32 top-10 h-96 w-96 rounded-full bg-hijau-400/20 blur-3xl" aria-hidden="true"></div>
         <div class="animasi-mengambang absolute -right-24 bottom-0 h-[26rem] w-[26rem] rounded-full bg-sage-500/20 blur-3xl" aria-hidden="true"></div>
@@ -97,7 +97,7 @@
     </section>
 
     {{-- ================= LAYANAN ================= --}}
-    <section class="gradasi-lembut relative overflow-hidden py-20">
+    <section class="gradasi-lembut beranda-layanan-transisi {{ !$dtBerita->count() && $dtArtikel->count() ? 'beranda-menuju-artikel' : '' }} relative overflow-hidden py-20">
         <div class="mx-auto max-w-7xl px-4 md:px-6">
             <div class="mx-auto max-w-2xl text-center" data-reveal>
                 <span class="inline-flex items-center gap-2 rounded-full border border-hijau-200 bg-white px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-hijau-700 shadow-sm">
@@ -150,7 +150,7 @@
 
     {{-- ================= KEGIATAN ================= --}}
     @if ($dtBerita->count())
-        <section class="mx-auto max-w-7xl px-4 py-24 md:px-6">
+        <section class="beranda-kegiatan-transisi {{ $dtArtikel->count() ? 'beranda-menuju-artikel' : '' }} mx-auto max-w-7xl px-4 py-24 md:px-6">
             <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between" data-reveal>
                 <div>
                     <span class="inline-flex items-center gap-2 rounded-full border border-sage-200 bg-sage-50 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-sage-700">
@@ -186,7 +186,7 @@
 
     {{-- ================= ARTIKEL ================= --}}
     @if ($dtArtikel->count())
-        <section class="relative overflow-hidden bg-ink-950 py-24">
+        <section class="beranda-artikel-transisi relative overflow-hidden bg-ink-950 py-24">
             <div class="pola-titik absolute inset-0 opacity-15"></div>
             <div class="absolute -left-24 top-10 h-72 w-72 rounded-full bg-hijau-600/20 blur-3xl"></div>
             <div class="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-moss-600/15 blur-3xl"></div>

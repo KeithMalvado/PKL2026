@@ -413,3 +413,411 @@ body {
     color: var(--color-hijau-900);
     font-weight: 700;
 }
+
+
+
+/* ==========================================
+   SISTEM TEMA WARNA BIDANG DKPP
+   Hero + Sidebar + Konten
+   ========================================== */
+
+/* GRADASI HERO ASLI IPAN */
+.gradasi-hero[class*="hero-bidang--"] {
+    background-color: var(--bidang-base) !important;
+
+    background-image:
+        radial-gradient(
+            115% 105% at 6% 0%,
+            var(--bidang-left) 0%,
+            transparent 56%
+        ),
+        radial-gradient(
+            85% 85% at 94% 2%,
+            var(--bidang-right) 0%,
+            transparent 52%
+        ),
+        radial-gradient(
+            80% 90% at 76% 100%,
+            var(--bidang-bottom) 0%,
+            transparent 58%
+        ),
+        linear-gradient(
+            135deg,
+            var(--bidang-base) 0%,
+            var(--bidang-mid) 48%,
+            var(--bidang-end) 100%
+        ) !important;
+}
+
+/* ==========================================
+   PALET WARNA
+   Dipakai bersama oleh hero dan konten
+   ========================================== */
+
+/* KESEHATAN HEWAN - UNGU */
+.hero-bidang--kesehatan-hewan,
+.tema-bidang--kesehatan-hewan {
+    --bidang-base: #55316D;
+    --bidang-left: #8E65B4;
+    --bidang-right: #BA92D9;
+    --bidang-bottom: #9B74BE;
+    --bidang-mid: #774A99;
+    --bidang-end: #62417B;
+}
+
+/* PETERNAKAN - COKELAT */
+.hero-bidang--peternakan,
+.tema-bidang--peternakan {
+    --bidang-base: #6B4534;
+    --bidang-left: #A47654;
+    --bidang-right: #D4A785;
+    --bidang-bottom: #B88962;
+    --bidang-mid: #93674B;
+    --bidang-end: #76533D;
+}
+
+/* PERIKANAN - BIRU MUDA */
+.hero-bidang--perikanan,
+.tema-bidang--perikanan {
+    --bidang-base: #216D91;
+    --bidang-left: #48A8CD;
+    --bidang-right: #A2E0F3;
+    --bidang-bottom: #63B8D8;
+    --bidang-mid: #348BAC;
+    --bidang-end: #28799B;
+}
+
+/* KETAHANAN PANGAN - HIJAU */
+.hero-bidang--ketahanan-pangan,
+.tema-bidang--ketahanan-pangan {
+    --bidang-base: #285E40;
+    --bidang-left: #4E956C;
+    --bidang-right: #8BCBA5;
+    --bidang-bottom: #64A978;
+    --bidang-mid: #3D8058;
+    --bidang-end: #326C4A;
+}
+
+/* SEKRETARIAT - ABU ABU KEHITAMAN */
+.hero-bidang--sekretariat,
+.tema-bidang--sekretariat {
+    --bidang-base: #3B4248;
+    --bidang-left: #69757E;
+    --bidang-right: #A5AFB6;
+    --bidang-bottom: #78848C;
+    --bidang-mid: #56616A;
+    --bidang-end: #434E56;
+}
+
+/* ==========================================
+   1. SIDEBAR PROFIL
+   ========================================== */
+
+/* Gradasi header sidebar sesuai bidang */
+.tema-bidang aside .gradasi-tema {
+    background-color: var(--bidang-base);
+
+    background-image:
+        radial-gradient(
+            100% 130% at 100% 0%,
+            var(--bidang-right),
+            transparent 65%
+        ),
+        linear-gradient(
+            115deg,
+            var(--bidang-base),
+            var(--bidang-mid),
+            var(--bidang-end)
+        );
+}
+
+/* Border luar sidebar */
+.tema-bidang aside > div {
+    border-color: color-mix(
+        in srgb,
+        var(--bidang-mid) 24%,
+        white
+    );
+}
+
+/* Menu sidebar yang sedang aktif */
+.tema-bidang aside nav a.bg-gradient-to-r {
+    background-image: linear-gradient(
+        115deg,
+        var(--bidang-base),
+        var(--bidang-mid)
+    );
+
+    color: white;
+
+    box-shadow: 0 5px 16px
+        color-mix(
+            in srgb,
+            var(--bidang-base) 20%,
+            transparent
+        );
+}
+
+/* Hover menu yang tidak aktif */
+.tema-bidang aside nav a:not(.bg-gradient-to-r):hover {
+    background-color: color-mix(
+        in srgb,
+        var(--bidang-right) 15%,
+        white
+    );
+
+    color: var(--bidang-base);
+}
+
+
+
+/* Warna panah saat hover */
+.tema-bidang aside nav a:not(.bg-gradient-to-r):hover svg {
+    color: var(--bidang-base);
+}
+
+/* ==========================================
+   2. AREA KONTEN
+   ========================================== */
+
+/* Latar halaman sangat lembut */
+.tema-bidang > section:not(.gradasi-hero) {
+    background-image: linear-gradient(
+        180deg,
+        color-mix(
+            in srgb,
+            var(--bidang-right) 7%,
+            white
+        ),
+        white 350px
+    );
+}
+
+/* Border kartu konten */
+.tema-bidang .konten-tema-bidang {
+    border-color: color-mix(
+        in srgb,
+        var(--bidang-mid) 22%,
+        white
+    );
+}
+
+/* Border gambar konten */
+.tema-bidang .konten-tema-bidang img {
+    border-color: color-mix(
+        in srgb,
+        var(--bidang-mid) 20%,
+        white
+    );
+}
+
+/* ==========================================
+   3. TIPOGRAFI DAN DETAIL ARTIKEL
+   ========================================== */
+
+/* Heading di dalam artikel */
+.tema-bidang .prose-dkpp
+:is(h2, h3, h4) {
+    color: var(--bidang-base);
+}
+
+/* Link dalam artikel */
+.tema-bidang .prose-dkpp a {
+    color: var(--bidang-base);
+    text-decoration-color: var(--bidang-mid);
+}
+
+.tema-bidang .prose-dkpp a:hover {
+    color: var(--bidang-mid);
+}
+
+/* Titik daftar */
+.tema-bidang .prose-dkpp li::marker {
+    color: var(--bidang-mid);
+}
+
+/* Kutipan */
+.tema-bidang .prose-dkpp blockquote {
+    border-left-color: var(--bidang-mid);
+
+    background: linear-gradient(
+        120deg,
+        color-mix(
+            in srgb,
+            var(--bidang-right) 15%,
+            white
+        ),
+        white
+    );
+}
+
+/* Tabel artikel */
+.tema-bidang .prose-dkpp table,
+.tema-bidang .prose-dkpp th,
+.tema-bidang .prose-dkpp td {
+    border-color: color-mix(
+        in srgb,
+        var(--bidang-mid) 20%,
+        white
+    );
+}
+
+.tema-bidang .prose-dkpp th {
+    background-color: color-mix(
+        in srgb,
+        var(--bidang-right) 14%,
+        white
+    );
+
+    color: var(--bidang-base);
+}
+
+/* Breadcrumb tetap netral di semua warna hero */
+.tema-bidang .gradasi-hero nav {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+
+
+
+/* ==========================================
+   BERANDA PUBLIK DKPP
+   SMOOTH SECTION COLOR TRANSITIONS
+   Hanya warna - layout tetap
+   ========================================== */
+
+/* 1. HERO HIJAU MEMUDAR KE PUTIH */
+
+.gradasi-hero.beranda-hero-transisi {
+    background-color: #0f1f18;
+
+    background-image:
+        linear-gradient(
+            180deg,
+            transparent 0%,
+            transparent 68%,
+            rgba(91, 145, 105, 0.10) 75%,
+            rgba(155, 193, 165, 0.36) 84%,
+            rgba(229, 240, 231, 0.82) 95%,
+            #ffffff 100%
+        ),
+        radial-gradient(
+            115% 105% at 6% 0%,
+            #2c533e 0%,
+            transparent 56%
+        ),
+        radial-gradient(
+            85% 85% at 94% 2%,
+            #47805f 0%,
+            transparent 52%
+        ),
+        radial-gradient(
+            80% 90% at 76% 100%,
+            #3a4423 0%,
+            transparent 58%
+        ),
+        linear-gradient(
+            135deg,
+            #0f1f18 0%,
+            #1a3227 48%,
+            #12241c 100%
+        );
+}
+
+/* 2. LAYANAN:
+   PUTIH KE SAGE MUDA LALU PUTIH */
+
+.gradasi-lembut.beranda-layanan-transisi {
+    background-color: #ffffff;
+
+    background-image:
+        radial-gradient(
+            75% 65% at 95% 30%,
+            rgba(102, 156, 124, 0.08),
+            transparent 72%
+        ),
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #f1f8f3 18%,
+            #eaf4ed 38%,
+            #f6faf7 72%,
+            #ffffff 100%
+        );
+}
+
+
+/* ==========================================
+   3. TRANSISI KE ARTIKEL & JURNAL
+   Putih -> sage -> hijau gelap
+
+   Transisi ditempatkan di akhir section
+   sebelumnya, bukan menutupi judul artikel.
+   ========================================== */
+
+.beranda-menuju-artikel {
+    position: relative;
+    isolation: isolate;
+}
+
+
+
+/* ==========================================
+   TRANSISI KE ARTIKEL & JURNAL
+   Putih -> sage -> forest green gelap
+   ========================================== */
+
+.beranda-menuju-artikel::after {
+    content: "";
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    width: 100vw;
+    height: 140px;
+
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 0;
+
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        #F5F8F6 18%,
+        #E6EEE8 34%,
+        #C7D7CB 49%,
+        #93AF9B 63%,
+        #527660 78%,
+        #21372B 91%,
+        #101915 100%
+    );
+}
+
+
+/* Konten tetap berada di atas gradasi */
+.beranda-menuju-artikel > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Artikel dimulai dengan warna yang sama
+   seperti ujung gradasi sebelumnya */
+.beranda-artikel-transisi {
+    background-color: #101915;
+    background-image:
+        radial-gradient(
+            80% 70% at 95% 55%,
+            rgba(71, 128, 95, 0.13),
+            transparent 70%
+        ),
+        linear-gradient(
+            180deg,
+            #101915 0%,
+            #111E17 48%,
+            #0F1713 100%
+        );
+}
+
+

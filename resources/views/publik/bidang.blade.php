@@ -5,7 +5,7 @@
 @section('konten')
     @php $logo = logo_bdg($bdg); @endphp
 
-    <x-hero-halaman :judul="$bdg->nama" induk="Bidang" :ket="$bdg->deskripsi" />
+    <x-hero-halaman :judul="$bdg->nama" induk="Bidang" :ket="$bdg->deskripsi" :tema="$bdg->slug" />
 
     <section class="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-20">
         <div class="mb-10 flex flex-wrap items-center gap-4 rounded-2xl border border-hijau-100 bg-white px-5 py-4 shadow-lembut" data-reveal>

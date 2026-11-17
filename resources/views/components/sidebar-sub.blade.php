@@ -33,11 +33,23 @@
                     @php $aktif = $rtAktif === $sub['route']; @endphp
                     <a
                         href="{{ route($sub['route']) }}"
-                        class="group flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm transition-all duration-300 {{ $aktif ? 'bg-gradient-to-r from-hijau-600 to-sage-600 font-semibold text-white shadow-md shadow-hijau-600/20' : 'text-ink-600 hover:bg-hijau-50 hover:text-hijau-700' }}"
+                        class="group flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm transition-all duration-300 {{ $aktif ? 'bg-gradient-to-r from-hijau-600 to-sage-600 font-semibold text-white shadow-md shadow-hijau-600/20' : 'text-ink-600 hover:bg-hijau-50 hover:text-hijau-700' }}"
                     >
-                        <span class="h-1.5 w-1.5 shrink-0 rounded-full transition {{ $aktif ? 'bg-white' : 'bg-hijau-300 group-hover:bg-hijau-500' }}"></span>
                         <span class="min-w-0 flex-1">{{ $sub['judul'] }}</span>
-                        <svg class="h-3.5 w-3.5 shrink-0 transition {{ $aktif ? 'text-white/80' : 'text-ink-300 group-hover:translate-x-0.5 group-hover:text-hijau-500' }}" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+
+                        <svg
+                            class="h-3.5 w-3.5 shrink-0 transition {{ $aktif ? 'text-white/80' : 'text-ink-300 group-hover:translate-x-0.5 group-hover:text-hijau-500' }}"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2.5"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                            />
+                        </svg>
                     </a>
                 @endforeach
             </nav>

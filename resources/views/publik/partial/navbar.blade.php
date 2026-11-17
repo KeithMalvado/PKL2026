@@ -101,10 +101,11 @@
                                     @foreach ($item['sub'] as $sub)
                                         <a
                                             href="{{ route($sub['route']) }}"
-                                            class="group flex items-center gap-2.5 rounded-xl px-3 py-2 text-[13px] transition {{ request()->routeIs($sub['route']) ? 'bg-gradient-to-r from-hijau-50 to-sage-50 font-semibold text-hijau-700' : 'text-ink-600 hover:bg-hijau-50/70 hover:text-hijau-700' }}"
+                                            class="group flex items-center rounded-xl px-3 py-2.5 text-[13px] transition-colors duration-200 {{ request()->routeIs($sub['route']) ? 'bg-gradient-to-r from-hijau-50 to-sage-50 font-semibold text-hijau-700' : 'text-ink-600 hover:bg-hijau-50/70 hover:text-hijau-700' }}"
                                         >
-                                            <span class="h-1.5 w-1.5 shrink-0 rounded-full {{ request()->routeIs($sub['route']) ? 'bg-hijau-500' : 'bg-hijau-200 group-hover:bg-hijau-400' }}"></span>
-                                            {{ $sub['judul'] }}
+                                            <span class="min-w-0 flex-1">
+                                                {{ $sub['judul'] }}
+                                            </span>
                                         </a>
                                     @endforeach
                                 </div>
