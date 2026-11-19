@@ -56,4 +56,25 @@ class ForumController extends Controller
 
         return back()->with('sukses', 'Pertanyaan dihapus.');
     }
+
+
+    public function perbaruiBalasan(
+        Request $request,
+        ForumBalas $balas
+    ): RedirectResponse {
+        $data = $request->validate([
+            'isi' => ['required', 'string', 'min:5', 'max:2000'],
+        ], [
+            'isi.required' => 'Jawaban tidak boleh kosong.',
+            'isi.min' => 'Jawaban minimal 5 karakter.',
+            'isi.max' => 'Jawaban maksimal 2000 karakter.',
+        ]);
+
+        $balas->update([
+            'isi' => $data['isi'],
+        ]);
+
+        return back()->with('sukses', 'Jawaban berhasil diperbarui.');
+    }
+
 }

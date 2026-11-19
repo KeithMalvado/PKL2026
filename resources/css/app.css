@@ -844,3 +844,177 @@ body {
             #101d18 100%
         );
 }
+
+
+/* ==================================================
+   GALERI FOTO ADMIN - TOMBOL UPLOAD
+   ================================================== */
+
+.btn-upload-foto {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 20px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: linear-gradient(110deg, #276749, #43866a);
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(39, 103, 73, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn-upload-foto:hover:not(:disabled) {
+    background: linear-gradient(110deg, #174a34, #2b634c);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(23, 74, 52, 0.28);
+}
+
+.btn-upload-foto:active:not(:disabled) {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 5px rgba(23, 74, 52, 0.18);
+}
+
+.btn-upload-foto:focus-visible {
+    outline: 3px solid rgba(67, 134, 106, 0.4);
+    outline-offset: 3px;
+}
+
+.btn-upload-foto:disabled {
+    cursor: wait;
+    opacity: 0.6;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-upload-foto {
+        transition: none;
+    }
+}
+
+
+
+/* Tombol upload Produk Hukum */
+.btn-produk-hukum {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(110deg, #276749, #43866a);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(39, 103, 73, .18);
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.btn-produk-hukum:hover:not(:disabled) {
+    background: linear-gradient(110deg, #174a34, #2b634c);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(23, 74, 52, .28);
+}
+
+.btn-produk-hukum:active:not(:disabled) {
+    transform: scale(.98);
+}
+
+.btn-produk-hukum:disabled {
+    cursor: wait;
+    opacity: .6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-produk-hukum {
+        transition: none;
+    }
+}
+
+
+
+/* Ganti PDF - hanya tombol Choose File */
+.input-ganti-pdf {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    color: #52675a;
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.input-ganti-pdf::file-selector-button {
+    margin-right: 14px;
+    padding: 9px 15px;
+    border: none;
+    border-radius: 9px;
+    background: #276749;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.input-ganti-pdf::file-selector-button:hover {
+    background: #174a34;
+}
+
+.input-ganti-pdf:active::file-selector-button {
+    transform: scale(0.97);
+}
+
+
+
+/* Tombol Lihat - Produk Hukum Publik */
+.btn-lihat-produk-hukum {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid #a8cbb7;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #276749;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-lihat-produk-hukum:hover {
+    background: #eaf5ed;
+    border-color: #276749;
+    color: #174a34;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(39, 103, 73, 0.12);
+}
+
+.btn-lihat-produk-hukum:active {
+    transform: scale(0.97);
+}
+
+.btn-lihat-produk-hukum:focus-visible {
+    outline: 3px solid #a8cbb7;
+    outline-offset: 3px;
+}

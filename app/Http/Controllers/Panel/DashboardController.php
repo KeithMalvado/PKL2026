@@ -26,8 +26,12 @@ class DashboardController extends Controller
         // pengaduan terbaru
         $pgdnTerbaru = Pgdn::with('bdg')->latest()->take(5)->get();
 
-        // forum menunggu moderasi
-        $forumTunggu = Forum::where('sts', 'tunggu')->count();
+
+        // Forum menunggu moderasi hanya dihitung untuk Admin
+        $forumTunggu = auth()->user()->isAdmin()
+            ? Forum::where('sts', 'tunggu')->count()
+            : null;
+
 
         return view('panel.dashboard', compact('statPgdn', 'pgdnTerbaru', 'forumTunggu'));
     }

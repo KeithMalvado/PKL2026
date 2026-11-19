@@ -41,6 +41,39 @@
                         <p class="text-xs font-semibold text-hijau-700">{{ $balas->petugas?->name ?? 'Petugas' }}</p>
                         <p class="mt-1 whitespace-pre-line text-sm text-ink-600">{{ $balas->isi }}</p>
                     </div>
+
+                    {{-- EDIT JAWABAN --}}
+                    <details class="mt-2 rounded-xl border border-hijau-200 bg-white">
+                        <summary class="cursor-pointer px-4 py-2.5 text-xs font-semibold text-hijau-700 hover:bg-hijau-50">
+                            Edit Jawaban
+                        </summary>
+
+                        <form
+                            method="POST"
+                            action="{{ route('panel.forum.balasan.perbarui', $balas) }}"
+                            class="space-y-3 border-t border-hijau-100 p-4"
+                        >
+                            @csrf
+                            @method('PUT')
+
+                            <textarea
+                                name="isi"
+                                rows="4"
+                                required
+                                minlength="5"
+                                maxlength="2000"
+                                class="w-full rounded-xl border border-hijau-200 bg-white px-4 py-3 text-sm text-ink-700 outline-none focus:border-hijau-500"
+                            >{{ $balas->isi }}</textarea>
+
+                            <button
+                                type="submit"
+                                class="rounded-xl bg-hijau-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-hijau-800"
+                            >
+                                Simpan Perubahan
+                            </button>
+                        </form>
+                    </details>
+
                 @endforeach
 
                 <form method="POST" action="{{ route('panel.forum.jawab', $forum) }}" class="mt-4">

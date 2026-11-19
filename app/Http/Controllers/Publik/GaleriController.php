@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * Controller modul Galeri:
@@ -58,13 +59,46 @@ class GaleriController extends Controller
         return view('publik.galeri.produk-hukum', compact('dtProdHkm', 'dtJenis', 'jenis'));
     }
 
-    /** Unduh file produk hukum + catat penghitung unduhan. */
-    public function unduhProdHkm(ProdHkm $prodHkm): RedirectResponse
+
+    /** Lihat PDF di browser tanpa menambah hitungan unduhan. */
+    public function lihatProdHkm(ProdHkm $prodHkm): BinaryFileResponse
     {
-        abort_unless($prodHkm->file && Storage::disk('public')->exists($prodHkm->file), 404);
+        abort_unless(
+            $prodHkm->file &&
+            Storage::disk('public')->exists($prodHkm->file),
+            404
+        );
+
+        return response()->file(
+            Storage::disk('public')->path($prodHkm->file),
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline',
+            ]
+        );
+    }
+
+
+
+    /** Unduh PDF langsung dan catat jumlah unduhan. */
+    public function unduhProdHkm(ProdHkm $prodHkm): BinaryFileResponse
+    {
+        abort_unless(
+            $prodHkm->file &&
+            Storage::disk('public')->exists($prodHkm->file),
+            404
+        );
+
+        $namaFile = \Illuminate\Support\Str::slug($prodHkm->judul)
+            . '-' . $prodHkm->getKey() . '.pdf';
 
         $prodHkm->increment('diunduh');
 
-        return redirect(Storage::url($prodHkm->file));
+        return response()->download(
+            Storage::disk('public')->path($prodHkm->file),
+            $namaFile,
+            ['Content-Type' => 'application/pdf']
+        );
     }
+
 }

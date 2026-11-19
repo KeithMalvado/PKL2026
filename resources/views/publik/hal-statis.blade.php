@@ -9,20 +9,41 @@
          * Tema otomatis berdasarkan halaman profil yang dibuka.
          * Halaman lainnya tetap menggunakan desain asli Ipan.
          */
+        // Gunakan tema Profil Bidang yang sama untuk halaman UPTD.
+        $judulUptd = mb_strtolower((string) $judul);
+
+        $temaUptd = request()->is('uptd/*') ? match (true) {
+            str_contains($judulUptd, 'keswan'),
+            str_contains($judulUptd, 'kesmavet'),
+            str_contains($judulUptd, 'klinik hewan'),
+            str_contains($judulUptd, 'rumah potong hewan')
+                => 'kesehatan-hewan',
+
+            str_contains($judulUptd, 'pembibitan'),
+            str_contains($judulUptd, 'hijauan pakan')
+                => 'peternakan',
+
+            str_contains($judulUptd, 'pelelangan ikan'),
+            str_contains($judulUptd, 'perikanan air tawar')
+                => 'perikanan',
+
+            default => null,
+        } : null;
+
         $temaBidang = match (request()->route()?->getName()) {
             'profil.bidang.keswan' => 'kesehatan-hewan',
             'profil.bidang.ternak' => 'peternakan',
             'profil.bidang.ikan' => 'perikanan',
             'profil.bidang.pangan' => 'ketahanan-pangan',
             'profil.sekretariat' => 'sekretariat',
-            default => null,
+            default => $temaUptd,
         };
     @endphp
 
     <div class="{{ $temaBidang ? 'tema-bidang tema-bidang--' . $temaBidang : '' }}">
 
         {{-- Hero halaman asli --}}
-        <x-hero-halaman :judul="$judul" />
+        <x-hero-halaman :judul="$judul" :tema="$temaBidang" />
 
         {{-- Konten halaman --}}
         <section class="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-20">

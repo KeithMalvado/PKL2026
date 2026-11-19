@@ -19,6 +19,8 @@ use App\Http\Controllers\Publik\PgdnController;
 use App\Http\Controllers\Publik\SkmController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Panel\AgendaController;
+use App\Http\Controllers\Panel\FotoController;
+use App\Http\Controllers\Panel\ProdukHukumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +51,8 @@ Route::get('/bidang/{bdg}', [HalamanController::class, 'bidang'])->name('bidang.
 // ===== Alur & SOP =====
 Route::get('/alur-dan-sop', [HalamanController::class, 'alurSop'])->name('alur-sop');
 
+
+
 // ===== UPTD =====
 Route::prefix('uptd')->name('uptd.')->group(function () {
     Route::get('/laboratorium-keswan', [HalamanController::class, 'uptdLab'])->name('lab');
@@ -71,6 +75,7 @@ Route::prefix('layanan')->name('layanan.')->group(function () {
     Route::get('/forum-konsultasi', [LayananController::class, 'forum'])->name('forum');
     Route::post('/forum-konsultasi', [LayananController::class, 'forumSimpan'])->name('forum.simpan');
 
+
     // Artikel & Jurnal
     Route::get('/artikel-dan-jurnal', [LayananController::class, 'artikel'])->name('artikel');
     Route::get('/artikel/{art}', [LayananController::class, 'artikelDetail'])->name('artikel.detail');
@@ -85,6 +90,8 @@ Route::prefix('galeri')->name('galeri.')->group(function () {
     Route::get('/foto', [GaleriController::class, 'foto'])->name('foto');
     Route::get('/video', [GaleriController::class, 'video'])->name('video');
     Route::get('/produk-hukum', [GaleriController::class, 'produkHukum'])->name('produk-hukum');
+    Route::get('/produk-hukum/{prodHkm}/lihat', [GaleriController::class, 'lihatProdHkm'])
+    ->name('produk-hukum.lihat');
     Route::get('/produk-hukum/{prodHkm}/unduh', [GaleriController::class, 'unduhProdHkm'])->name('produk-hukum.unduh');
 });
 
@@ -189,10 +196,40 @@ Route::middleware(['auth', 'role'])->prefix('panel')->name('panel.')->group(func
         Route::put('/video/{vid}', [VideoController::class, 'perbarui'])->name('video.perbarui');
         Route::delete('/video/{vid}', [VideoController::class, 'hapus'])->name('video.hapus');
 
+
+        // ===== Dokumen SOP =====
         Route::get('/sop', [SopController::class, 'index'])->name('sop.index');
         Route::post('/sop', [SopController::class, 'simpan'])->name('sop.simpan');
         Route::put('/sop/{dok}', [SopController::class, 'perbarui'])->name('sop.perbarui');
         Route::delete('/sop/{dok}', [SopController::class, 'hapus'])->name('sop.hapus');
+
+        // ===== Manajemen Produk Hukum =====
+        Route::get('/produk-hukum', [ProdukHukumController::class, 'index'])
+            ->name('produk-hukum.index');
+
+        Route::post('/produk-hukum', [ProdukHukumController::class, 'simpan'])
+            ->name('produk-hukum.simpan');
+
+        Route::put('/produk-hukum/{prodHkm}', [ProdukHukumController::class, 'perbarui'])
+            ->name('produk-hukum.perbarui');
+
+        Route::delete('/produk-hukum/{prodHkm}', [ProdukHukumController::class, 'hapus'])
+            ->name('produk-hukum.hapus');
+
+
+        // ===== Manajemen Galeri Foto Kegiatan =====
+        Route::get('/foto-kegiatan', [FotoController::class, 'index'])
+            ->name('foto.index');
+
+        Route::post('/foto-kegiatan', [FotoController::class, 'simpan'])
+            ->name('foto.simpan');
+
+        Route::put('/foto-kegiatan/{foto}', [FotoController::class, 'perbarui'])
+            ->name('foto.perbarui');
+
+        Route::delete('/foto-kegiatan/{foto}', [FotoController::class, 'hapus'])
+            ->name('foto.hapus');
+
 
         Route::get('/halaman', [HalamanPanelController::class, 'index'])->name('halaman.index');
         Route::get('/halaman/{hal}/ubah', [HalamanPanelController::class, 'edit'])->name('halaman.edit');
@@ -201,6 +238,7 @@ Route::middleware(['auth', 'role'])->prefix('panel')->name('panel.')->group(func
 
         Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
         Route::post('/forum/{forum}/jawab', [ForumController::class, 'jawab'])->name('forum.jawab');
+        Route::put('/forum/balasan/{balas}', [ForumController::class, 'perbaruiBalasan'])->name('forum.balasan.perbarui');
         Route::put('/forum/{forum}/tampil', [ForumController::class, 'tampil'])->name('forum.tampil');
         Route::delete('/forum/{forum}', [ForumController::class, 'hapus'])->name('forum.hapus');
     });

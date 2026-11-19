@@ -57,11 +57,43 @@
                             @endif
                         </div>
 
-                        {{-- tombol unduh --}}
-                        <a href="{{ route('galeri.produk-hukum.unduh', $dok) }}" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-hijau-600 to-sage-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-hijau-600/20 transition hover:-translate-y-0.5 hover:shadow-lg">
-                            <svg class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
-                            Unduh
-                        </a>
+
+                        {{-- TOMBOL LIHAT DAN UNDUH --}}
+                        <div class="flex shrink-0 flex-wrap items-center gap-2">
+
+                            {{-- Lihat PDF --}}
+                            <a
+                                href="{{ route('galeri.produk-hukum.lihat', $dok) }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn-lihat-produk-hukum"
+                            >
+                                <svg class="h-5 w-5" fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="1.8">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.25 12s3.5-6.75 9.75-6.75S21.75 12 21.75 12s-3.5 6.75-9.75 6.75S2.25 12 2.25 12z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                                Lihat
+                            </a>
+
+                            {{-- Unduh PDF --}}
+                            <a
+                                href="{{ route('galeri.produk-hukum.unduh', $dok) }}"
+                                class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-hijau-600 to-sage-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+                            >
+                                <svg class="h-5 w-5" fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
+                                </svg>
+                                Unduh
+                            </a>
+
+                        </div>
+
                     </div>
                 @endforeach
             </div>
